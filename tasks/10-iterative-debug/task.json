@@ -1,0 +1,9 @@
+{
+  "id": "10-iterative-debug",
+  "name": "Iterative Debug",
+  "capability": "iterative_debugging",
+  "time_limit_seconds": 120,
+  "prompt": "The file `seed/stats.py` contains a `compute_stats` function that should calculate mean, median, mode, and standard deviation of a list of numbers. When you run `python seed/stats.py`, it crashes with a runtime error. Debug it iteratively:\n\n1. Run the script to see the error\n2. Fix the bug\n3. Run again to verify it works\n4. Write the corrected file to `workspace/stats.py`\n\nThe script should print correct results when run and also work as an importable module.",
+  "expected_output_files": ["workspace/stats.py"],
+  "tags": ["debugging", "iterative", "runtime"]
+}

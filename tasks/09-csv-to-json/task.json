@@ -1,0 +1,9 @@
+{
+  "id": "09-csv-to-json",
+  "name": "CSV to JSON",
+  "capability": "data_transformation",
+  "time_limit_seconds": 90,
+  "prompt": "Read the file `seed/employees.csv` and write a JSON file `workspace/employees.json` that:\n\n1. Parses the CSV (has headers: name, department, salary, start_date)\n2. Groups employees by department\n3. For each department, calculates: employee count, average salary (rounded to 2 decimals), list of employee names\n4. Output format should be: {\"departments\": {\"Engineering\": {\"count\": 3, \"avg_salary\": 95000.00, \"employees\": [\"Alice\", \"Bob\", ...]}, ...}}\n\nWrite a Python script `workspace/transform.py` that does the conversion, AND the resulting `workspace/employees.json`.",
+  "expected_output_files": ["workspace/employees.json", "workspace/transform.py"],
+  "tags": ["data", "csv", "json", "transform"]
+}

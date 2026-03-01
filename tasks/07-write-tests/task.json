@@ -1,0 +1,9 @@
+{
+  "id": "07-write-tests",
+  "name": "Write Tests",
+  "capability": "test_generation",
+  "time_limit_seconds": 120,
+  "prompt": "Read the file `seed/calculator.py` which contains a `Calculator` class. Write a comprehensive test file `workspace/test_calculator.py` using pytest. Your tests should:\n\n1. Test all four operations (add, subtract, multiply, divide)\n2. Test edge cases (division by zero, negative numbers, floats)\n3. Test the `history` property\n4. Test the `clear` method\n5. Have at least 8 test functions\n\nThe tests should all pass when run with `pytest workspace/test_calculator.py`.",
+  "expected_output_files": ["workspace/test_calculator.py"],
+  "tags": ["testing", "pytest", "coverage"]
+}

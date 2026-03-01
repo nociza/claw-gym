@@ -1,0 +1,9 @@
+{
+  "id": "06-shell-data-query",
+  "name": "Shell Data Query",
+  "capability": "shell_tool_usage",
+  "time_limit_seconds": 90,
+  "prompt": "Using shell commands, analyze the file `seed/access.log` and write the results to `workspace/report.txt`. The report should contain:\n\n1. Total number of log lines\n2. Number of unique IP addresses\n3. The IP address with the most requests\n4. Number of requests that returned HTTP 404\n5. The most frequently requested URL path\n\nFormat each answer on its own line, prefixed with the question number, e.g.:\n1. 150\n2. 23\n3. 192.168.1.1\n4. 12\n5. /api/users",
+  "expected_output_files": ["workspace/report.txt"],
+  "tags": ["shell", "data", "analysis"]
+}

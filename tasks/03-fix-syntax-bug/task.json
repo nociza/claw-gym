@@ -1,0 +1,9 @@
+{
+  "id": "03-fix-syntax-bug",
+  "name": "Fix Syntax Bug",
+  "capability": "bug_fix_syntax",
+  "time_limit_seconds": 60,
+  "prompt": "The file `seed/tokenizer.py` has several syntax errors that prevent it from running. Fix all syntax errors so the module imports and runs correctly. Write the corrected file to `workspace/tokenizer.py`.",
+  "expected_output_files": ["workspace/tokenizer.py"],
+  "tags": ["bugfix", "syntax", "editing"]
+}
