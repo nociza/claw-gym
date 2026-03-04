@@ -1,0 +1,9 @@
+{
+  "id": "27-long-horizon-project",
+  "name": "Long-Horizon Project Planning",
+  "capability": "planning",
+  "time_limit_seconds": 180,
+  "prompt": "Read the specification document at seed/complex_spec.md. It describes a real-time analytics platform with functional requirements, non-functional requirements, and technical constraints.\n\nCreate a detailed project plan and save it to workspace/plan.json with this structure:\n{\n  \"project_name\": \"<name>\",\n  \"phases\": [\n    {\n      \"id\": \"phase-1\",\n      \"name\": \"<phase name>\",\n      \"description\": \"<what this phase accomplishes>\",\n      \"dependencies\": [],\n      \"deliverables\": [\"<deliverable 1>\", \"<deliverable 2>\", ...]\n    },\n    ...\n  ]\n}\n\nRequirements for the plan:\n1. Include at least 5 phases.\n2. Phase dependencies must form a valid DAG (directed acyclic graph) — no circular dependencies.\n3. At least one phase must have an empty dependencies list (a root phase).\n4. Each phase must have at least 2 deliverables.\n5. The plan must address the key constraints mentioned in the spec: Kafka, PostgreSQL, Kubernetes, sub-second latency, horizontal scaling, data retention, authentication, and monitoring.\n6. Each phase must have all required keys: id, name, description, dependencies, deliverables.",
+  "expected_output_files": ["workspace/plan.json"],
+  "tags": ["planning", "long_horizon", "system_design"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "22-data-analysis-pipeline",
+  "name": "Data Analysis Pipeline",
+  "capability": "data_analysis",
+  "time_limit_seconds": 120,
+  "prompt": "The file seed/sales.csv contains 100 rows of sales transaction data with columns: date, product, region, revenue, quantity, returns.\n\nAnalyze this dataset and write your findings to workspace/analysis.json with these fields:\n\n1. \"total_revenue\": Sum of all revenue values (rounded to 2 decimal places).\n2. \"outlier_row\": The 1-based row number of the obvious outlier (a row with an unusually extreme revenue value compared to the rest of the data).\n3. \"top_product\": The product name with the highest total revenue across all transactions.\n4. \"month_over_month_growth\": Percentage growth in total revenue from the first month to the last month in the data, rounded to 1 decimal place (as a number, e.g. 15.3 for 15.3% growth).\n5. \"revenue_quantity_correlation\": The Pearson correlation coefficient between revenue and quantity columns, rounded to 2 decimal places.\n\nUse Python, shell tools, or any available method to compute these values.",
+  "expected_output_files": ["workspace/analysis.json"],
+  "tags": ["data_analysis", "statistics", "csv"]
+}

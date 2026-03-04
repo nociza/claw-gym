@@ -205,6 +205,80 @@ def build_agent_prompt(task: dict, staging: Path, claw: str) -> str:
     return prompt
 
 
+def is_multi_turn(task: dict) -> bool:
+    """Check if a task uses multi-turn conversation (has 'turns' key)."""
+    return "turns" in task
+
+
+def build_multi_turn_prompt(
+    task: dict, staging: Path, claw: str, turn_index: int, previous_responses: list[str]
+) -> str:
+    """Build a cumulative prompt for a multi-turn task.
+
+    Concatenates all previous turns and responses into a single growing prompt,
+    since agents use a single-message (-m) interface.
+    """
+    turns = task["turns"]
+    claw_ws = CLAW_WORKSPACES[claw]
+    try:
+        rel_staging = staging.relative_to(claw_ws)
+    except ValueError:
+        rel_staging = staging
+
+    seed_rel = f"{rel_staging}/seed"
+    output_rel = f"{rel_staging}/output"
+
+    parts = []
+    for i in range(turn_index + 1):
+        turn_text = turns[i].replace("seed/", f"{seed_rel}/").replace("workspace/", f"{output_rel}/")
+        parts.append(f"[Turn {i + 1}] USER: {turn_text}")
+        if i < len(previous_responses):
+            # Summarize previous response (truncate to avoid prompt explosion)
+            resp = previous_responses[i]
+            if len(resp) > 2000:
+                resp = resp[:2000] + "...(truncated)"
+            parts.append(f"[Turn {i + 1}] ASSISTANT: {resp}")
+
+    prompt = "\n\n".join(parts)
+
+    # Add critical instructions on the final turn
+    prompt += (
+        f"\n\nCRITICAL INSTRUCTIONS:"
+        f"\n- Input files (if any) are in: {seed_rel}/"
+        f"\n- You MUST use file_write tool to save each output file to: {output_rel}/"
+        f"\n- You MUST actually call the file_read and file_write tools - do NOT just describe what you would do."
+        f"\n- Call file_write for EVERY output file. Do not skip any tool calls."
+    )
+    return prompt
+
+
+def run_multi_turn(task: dict, claw: str, staging: Path, timeout: int) -> dict:
+    """Run a multi-turn task, sending each turn sequentially.
+
+    Divides the total timeout evenly across turns. Collects all responses.
+    """
+    turns = task["turns"]
+    n_turns = len(turns)
+    per_turn_timeout = max(30, timeout // n_turns)
+    previous_responses: list[str] = []
+
+    last_result = None
+    for i in range(n_turns):
+        prompt = build_multi_turn_prompt(task, staging, claw, i, previous_responses)
+        result = run_with_claw(claw, prompt, per_turn_timeout)
+        last_result = result
+
+        if result["status"] != "completed":
+            return result
+
+        previous_responses.append(result.get("stdout", ""))
+
+    # Return the last run result with combined stdout
+    if last_result:
+        last_result["stdout"] = "\n---TURN SEPARATOR---\n".join(previous_responses)
+    return last_result
+
+
 def check_network() -> bool:
     """Quick check if network is available."""
     import socket
@@ -432,9 +506,12 @@ def main() -> None:
 
             # Stage seed files into the claw's workspace
             staging = stage_task(task, claw)
-            prompt = build_agent_prompt(task, staging, claw)
 
-            run_result = run_with_claw(claw, prompt, timeout)
+            if is_multi_turn(task):
+                run_result = run_multi_turn(task, claw, staging, timeout)
+            else:
+                prompt = build_agent_prompt(task, staging, claw)
+                run_result = run_with_claw(claw, prompt, timeout)
             print(f"    Status: {run_result['status']} ({run_result['elapsed_seconds']}s)")
 
             if run_result["status"] == "completed":

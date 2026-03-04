@@ -1,0 +1,9 @@
+{
+  "id": "21-constrained-output",
+  "name": "Constrained Output",
+  "capability": "instruction_following",
+  "time_limit_seconds": 90,
+  "prompt": "Write an essay about software development and save it to workspace/essay.txt. The essay MUST satisfy ALL of the following constraints:\n\n1. The essay must have EXACTLY 3 paragraphs (separated by blank lines).\n2. The word \"framework\" must appear at least 2 times in the essay.\n3. The first paragraph must contain at least 50 words.\n4. The essay must NOT contain any bullet points (lines starting with - or *) or numbered lists (lines starting with digits followed by . or )).\n5. The last sentence of the entire essay must end with a question mark (?).\n6. The essay must start with a title line in ALL CAPS (every letter uppercase, no lowercase letters in the title line).\n\nWrite the essay directly — do not include any explanation or commentary outside the essay itself.",
+  "expected_output_files": ["workspace/essay.txt"],
+  "tags": ["instruction_following", "constrained_output"]
+}

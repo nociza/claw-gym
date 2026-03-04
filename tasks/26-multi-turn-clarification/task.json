@@ -1,0 +1,14 @@
+{
+  "id": "26-multi-turn-clarification",
+  "name": "Multi-Turn Clarification",
+  "capability": "multi_turn_conversation",
+  "time_limit_seconds": 180,
+  "prompt": "This is a multi-turn task. Follow each turn's instructions progressively.",
+  "turns": [
+    "Write a Python function that processes data. Save the file to workspace/processor.py. The function should be called `process_records` and take a list of records as input. Start with a reasonable implementation based on what you know so far.",
+    "Clarification about the previous request: the function `process_records` takes a list of dicts, where each dict has keys 'name' (str), 'value' (numeric), and 'category' (str). It should return a dict mapping each category to the sum of values for that category. Update workspace/processor.py with this implementation.",
+    "One more update to workspace/processor.py: modify `process_records` to filter out records with negative values before summing. Also add a new function `top_category(records)` that calls `process_records` and returns the category name with the highest total value. Handle the edge case of an empty input list by returning an empty string."
+  ],
+  "expected_output_files": ["workspace/processor.py"],
+  "tags": ["multi_turn", "clarification", "conversational"]
+}

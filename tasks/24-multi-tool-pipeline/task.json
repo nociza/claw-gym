@@ -1,0 +1,9 @@
+{
+  "id": "24-multi-tool-pipeline",
+  "name": "Multi-Tool Pipeline",
+  "capability": "tool_orchestration",
+  "time_limit_seconds": 150,
+  "prompt": "You must complete a multi-step data cleaning pipeline. Follow these steps IN ORDER:\n\n1. Read the configuration file at seed/config.json to understand processing parameters.\n2. Read the transformation rules at seed/transform_rules.txt.\n3. Read the raw data at seed/raw_data.csv.\n4. Apply the cleaning rules to the data:\n   - Remove rows with negative revenue values\n   - Remove rows where revenue exceeds the outlier_threshold from config.json\n   - Remove rows with regions not in the valid_regions list from config.json\n   - Remove exact duplicate rows (all columns identical)\n5. Write the cleaned data to workspace/cleaned.csv (keep the CSV header).\n6. Compute a summary with these fields:\n   - total_rows: number of rows in the cleaned data\n   - rows_removed: number of rows removed from the original\n   - average_revenue: mean revenue of cleaned data (rounded to 2 decimal places)\n   - unique_products: number of distinct product values in cleaned data\n   - unique_regions: number of distinct region values in cleaned data\n7. Write the summary to workspace/summary.json.\n\nYou must read each input file and write both output files.",
+  "expected_output_files": ["workspace/cleaned.csv", "workspace/summary.json"],
+  "tags": ["tool_orchestration", "pipeline", "data_cleaning"]
+}

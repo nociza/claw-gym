@@ -1,0 +1,9 @@
+{
+  "id": "25-adversarial-comprehension",
+  "name": "Adversarial Comprehension",
+  "capability": "adversarial_robustness",
+  "time_limit_seconds": 120,
+  "prompt": "The seed/reports/ directory contains three status reports (report_a.txt, report_b.txt, report_c.txt) about the same project, written by different team members. The reports contain CONTRADICTORY information — they do not all agree on certain facts.\n\nRead all three reports carefully and answer these questions:\n\n1. What is the project name? (All reports should agree on this.)\n2. On which fact do Report A and Report B disagree? State the specific field they disagree on and what each report says.\n3. On which fact do Report A and Report C disagree? State the specific field they disagree on and what each report says.\n4. What is the launch quarter according to the MAJORITY of the reports (2 out of 3)?\n5. What is the budget amount according to the MAJORITY of the reports (2 out of 3)?\n\nWrite your answers to workspace/answers.json as:\n{\n  \"q1\": \"<project name>\",\n  \"q2\": \"<field of disagreement between A and B, and what each says>\",\n  \"q3\": \"<field of disagreement between A and C, and what each says>\",\n  \"q4\": \"<majority launch quarter>\",\n  \"q5\": \"<majority budget>\"\n}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["robustness", "adversarial", "comprehension"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "23-transcript-analysis",
+  "name": "Transcript Analysis",
+  "capability": "multimodal_analysis",
+  "time_limit_seconds": 150,
+  "prompt": "You have two files to analyze:\n\n1. seed/transcript.txt — A meeting transcript with multiple speakers, decisions, and action items.\n2. seed/meeting.wav — A WAV audio file associated with the meeting.\n\nAnswer these 5 questions:\n\nQ1: How many distinct speakers are in the transcript? (Give a number)\nQ2: What major technical decision was made in the meeting? (Brief description)\nQ3: What is the duration of the WAV file in seconds? (Read the WAV file headers using Python or shell tools to determine this — do NOT guess)\nQ4: What is the sample rate of the WAV file in Hz? (Read from the WAV file headers)\nQ5: How many action items are listed in the transcript? (Give a number)\n\nWrite your answers to workspace/answers.json as:\n{\n  \"q1\": <number>,\n  \"q2\": \"<decision description>\",\n  \"q3\": <duration in seconds>,\n  \"q4\": <sample rate>,\n  \"q5\": <number of action items>\n}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["multimodal", "audio", "transcript"]
+}

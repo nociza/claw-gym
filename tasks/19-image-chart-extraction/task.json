@@ -1,0 +1,9 @@
+{
+  "id": "19-image-chart-extraction",
+  "name": "Image Chart Extraction",
+  "capability": "vision",
+  "time_limit_seconds": 150,
+  "prompt": "The file seed/chart.png contains a grouped bar chart showing quarterly revenue data for 5 companies across 4 quarters (Q1-Q4).\n\nYour task is to extract the data from this chart image into structured JSON. You may use Python, PIL, or shell tools to analyze the image.\n\nWrite the extracted data to workspace/extracted.json in this format:\n{\n  \"companies\": [\n    {\n      \"name\": \"<company name>\",\n      \"q1\": <revenue value>,\n      \"q2\": <revenue value>,\n      \"q3\": <revenue value>,\n      \"q4\": <revenue value>\n    },\n    ...\n  ]\n}\n\nExtract the company names from the chart legend and the revenue values from the bar heights. Values should be numeric (not strings).",
+  "expected_output_files": ["workspace/extracted.json"],
+  "tags": ["vision", "data_extraction", "image"]
+}

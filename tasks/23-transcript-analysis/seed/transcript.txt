@@ -1,0 +1,76 @@
+MEETING TRANSCRIPT
+Project: DataVault Platform Migration
+Date: 2025-10-15
+Location: Conference Room B (Virtual Bridge)
+
+Attendees:
+- Sarah Mitchell (Engineering Manager)
+- James Okafor (Senior Backend Engineer)
+- Priya Deshmukh (Database Architect)
+- Tom Andersson (DevOps Lead)
+
+---
+
+[00:00:15] Sarah Mitchell: Good morning everyone. Let's jump right in. The main
+topic today is finalizing our database migration strategy. We need to decide
+between staying with MySQL or moving to PostgreSQL for the DataVault platform.
+James, can you start with the technical assessment?
+
+[00:01:30] James Okafor: Sure. We've been running benchmarks for the past two
+weeks. PostgreSQL outperforms MySQL on our analytical query workload by about
+40%. The JSON support is also significantly better — we currently have a lot of
+workarounds for JSON handling in MySQL that would become native operations in
+PostgreSQL. The main risk is the migration effort itself.
+
+[00:03:45] Priya Deshmukh: I agree with James's assessment. From a data
+architecture perspective, PostgreSQL gives us several advantages: better support
+for complex types, materialized views for our reporting layer, and the PostGIS
+extension if we ever need geospatial queries. I've already prototyped the schema
+migration and it's cleaner than expected.
+
+[00:05:20] Tom Andersson: From an ops perspective, I've set up PostgreSQL on our
+staging cluster. The monitoring integration with our existing Prometheus stack is
+actually easier than MySQL. One concern: our backup scripts will need rewriting,
+and we need to validate our disaster recovery procedures.
+
+[00:07:00] Sarah Mitchell: So it sounds like there's consensus on PostgreSQL.
+Let me make sure we're all aligned — we're recommending PostgreSQL as the primary
+database for DataVault going forward. Any objections?
+
+[00:07:30] James Okafor: No objections. PostgreSQL is the right choice.
+
+[00:07:45] Priya Deshmukh: Agreed. PostgreSQL migration is the way to go.
+
+[00:08:00] Tom Andersson: Agreed. I'll start on the production infrastructure
+planning.
+
+[00:08:30] Sarah Mitchell: Great. Decision made: we are migrating DataVault
+to PostgreSQL. Now let's go over action items and timeline.
+
+---
+
+ACTION ITEMS:
+
+1. [James Okafor] Complete the application layer migration guide by October 22.
+   Priority: High.
+
+2. [Priya Deshmukh] Finalize the PostgreSQL schema migration scripts and run
+   validation tests on staging by October 25. Priority: High.
+
+3. [Tom Andersson] Update backup and disaster recovery procedures for PostgreSQL
+   and document the new runbooks by October 29. Priority: Medium.
+
+4. [Sarah Mitchell] Schedule a follow-up review meeting for November 1 to assess
+   migration readiness and approve the production cutover plan. Priority: High.
+
+---
+
+DECISION LOG:
+- Decision: Migrate DataVault platform from MySQL to PostgreSQL.
+- Rationale: 40% better analytical query performance, native JSON support,
+  materialized views, better extensibility.
+- Approved by: All attendees (unanimous).
+
+Next Meeting: November 1, 2025
+
+END OF TRANSCRIPT

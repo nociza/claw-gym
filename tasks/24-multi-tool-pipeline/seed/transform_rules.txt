@@ -1,0 +1,12 @@
+Data Cleaning Rules
+====================
+
+Apply the following transformation rules to the raw sales data:
+
+1. NEGATIVE CHECK: Remove any row where the revenue column is negative (less than 0).
+2. OUTLIER CHECK: Remove any row where revenue exceeds the outlier_threshold defined in config.json.
+3. REGION VALIDATION: Remove any row whose region is not in the valid_regions list from config.json.
+4. DUPLICATE REMOVAL: Remove exact duplicate rows (where all column values are identical). Keep the first occurrence.
+5. PRESERVE HEADERS: The output CSV must retain the original column headers.
+6. MAINTAIN ORDER: Keep remaining rows in their original order.
+7. NO DATA MODIFICATION: Do not alter any cell values — only remove entire rows that violate rules 1-4.

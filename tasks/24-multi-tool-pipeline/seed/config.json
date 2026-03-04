@@ -1,0 +1,7 @@
+{
+  "pipeline_name": "Q4 Sales Cleanup",
+  "outlier_threshold": 10000,
+  "valid_regions": ["North", "South", "East", "West"],
+  "output_format": "csv",
+  "decimal_places": 2
+}

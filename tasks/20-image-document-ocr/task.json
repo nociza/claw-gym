@@ -1,0 +1,9 @@
+{
+  "id": "20-image-document-ocr",
+  "name": "Image Document OCR",
+  "capability": "vision",
+  "time_limit_seconds": 150,
+  "prompt": "The file seed/document.png contains an image of a business invoice. Analyze the image (using Python, PIL, OCR tools, or any method available) and answer the following 5 questions:\n\n1. What is the invoice number?\n2. What is the company name (the vendor/sender, not the client)?\n3. What is the total amount on the invoice?\n4. What is the invoice date?\n5. How many line items are on the invoice?\n\nWrite your answers to workspace/answers.json as:\n{\n  \"q1\": \"<invoice number>\",\n  \"q2\": \"<company name>\",\n  \"q3\": \"<total amount>\",\n  \"q4\": \"<invoice date>\",\n  \"q5\": \"<number of line items>\"\n}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["vision", "ocr", "document"]
+}
