@@ -1,0 +1,9 @@
+{
+  "id": "12-corpus-kb-search",
+  "name": "Corpus KB Search",
+  "capability": "corpus_search",
+  "time_limit_seconds": 150,
+  "prompt": "The `seed/kb/` directory contains 15 technical knowledge base articles. Read and search them to answer these questions. Write answers to `workspace/answers.json`.\n\n1. Which articles mention the circuit breaker pattern? (list of filenames without extension)\n2. How many distinct caching levels/layers are described across all articles? (integer)\n3. Which load testing tool is recommended in the articles? (tool name)\n4. How many articles reference the CAP theorem? (integer)\n5. What database migration strategy is recommended for zero-downtime deployments? (strategy name)\n\nFormat:\n{\"q1\": [\"article-name-1\", \"article-name-2\"], \"q2\": 4, \"q3\": \"k6\", \"q4\": 2, \"q5\": \"blue-green\"}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["corpus", "document_qa", "knowledge_base"]
+}

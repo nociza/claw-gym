@@ -1,0 +1,42 @@
+# Scheduler Service Configuration
+service:
+  name: scheduler-service
+  version: 1.1.0
+  environment: production
+
+server:
+  host: 0.0.0.0
+  port: 8087
+  workers: 2
+  debug: true
+
+logging:
+  level: debug
+  format: text
+  output: stdout
+
+database:
+  host: db-primary.internal
+  port: 5432
+  name: scheduler_db
+  user: scheduler_admin
+  password: "Scheduler2024Pass"
+  ssl: false
+  pool_size: 5
+
+queue:
+  type: rabbitmq
+  host: rabbitmq.internal
+  port: 5672
+  user: scheduler
+  password: "RabbitMQ_Pass_2024"
+  vhost: /scheduler
+
+health_check:
+  enabled: true
+  path: /health
+  interval: 60
+
+cron:
+  cleanup_interval: "0 2 * * *"
+  report_interval: "0 8 * * 1"

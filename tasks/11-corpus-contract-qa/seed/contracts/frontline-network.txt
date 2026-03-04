@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: Frontline Network
+Contract ID: SVC-2024-006
+Effective Date: January 15, 2024
+Expiration Date: January 14, 2026
+Annual Value: $150,000
+
+Services Provided:
+- Enterprise network management
+- SD-WAN deployment and support
+- Network monitoring (24/7)
+- Quarterly capacity planning
+
+Terms:
+- Payment: Monthly
+- Auto-renewal: Yes, for successive 1-year terms
+- Termination notice: 90 days before expiration
+- Penalty for early termination: 30% of remaining value
+
+Contact: Robert Kim, robert@frontline.example.com

@@ -1,0 +1,10 @@
+{
+  "id": "07-web-search-research",
+  "name": "Web Search Research",
+  "capability": "web_search",
+  "time_limit_seconds": 150,
+  "prompt": "Research and compare three countries: Russia, Canada, and the United States. For each country, find:\n- Approximate population (in millions)\n- Approximate land area (in square kilometers)\n- Approximate GDP (nominal, in trillions USD)\n\nWrite the results to `workspace/countries.json` in this format:\n{\n  \"russia\": {\"population_millions\": 144, \"area_sq_km\": 17098242, \"gdp_trillions_usd\": 1.9},\n  \"canada\": {\"population_millions\": 40, \"area_sq_km\": 9984670, \"gdp_trillions_usd\": 2.1},\n  \"usa\": {\"population_millions\": 335, \"area_sq_km\": 9833520, \"gdp_trillions_usd\": 27.4}\n}\n\nUse approximate recent values. Exact precision is not required.",
+  "expected_output_files": ["workspace/countries.json"],
+  "tools_hint": "web_search",
+  "tags": ["web_search", "research", "comparison"]
+}

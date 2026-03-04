@@ -1,0 +1,9 @@
+{
+  "id": "16-long-context-data-reconcile",
+  "name": "Long Context Data Reconcile",
+  "capability": "long_context",
+  "time_limit_seconds": 150,
+  "prompt": "The `seed/data/` directory contains three CSV files: `orders.csv` (50 rows), `customers.csv` (20 rows), and `products.csv` (15 rows). Cross-reference them and write answers to `workspace/answers.json`.\n\n1. What is the total revenue by region? (object: region -> total revenue)\n2. Which customers have no orders? (list of customer names)\n3. Are there any orders referencing non-existent customer IDs? (list of order IDs)\n4. What is the average order value by product category? (object: category -> average)\n5. Which customer has the highest total spending? (customer name)\n\nFormat:\n{\"q1\": {\"North\": 5000.00, \"South\": 3000.00}, \"q2\": [\"Jane Doe\"], \"q3\": [101], \"q4\": {\"Electronics\": 250.00}, \"q5\": \"John Smith\"}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["long_context", "data", "reconciliation"]
+}

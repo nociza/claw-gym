@@ -1,0 +1,9 @@
+{
+  "id": "04-multi-file-feature",
+  "name": "Multi-File Feature",
+  "capability": "multi_file_editing",
+  "time_limit_seconds": 120,
+  "prompt": "The `seed/` directory contains a simple note-taking app with `models.py` (Note dataclass) and `store.py` (NoteStore class with add/get/list). Add a **search feature**:\n\n1. Add a `tags: list[str]` field to the `Note` dataclass in `models.py` (default empty list)\n2. Add a `search(query: str) -> list[Note]` method to `NoteStore` in `store.py` that returns notes where the query appears in the title, content, or tags (case-insensitive)\n3. Add a `get_by_tag(tag: str) -> list[Note]` method to `NoteStore` that returns all notes with the given tag\n\nWrite both modified files to `workspace/models.py` and `workspace/store.py`.",
+  "expected_output_files": ["workspace/models.py", "workspace/store.py"],
+  "tags": ["coding", "multi-file", "feature", "coordination"]
+}

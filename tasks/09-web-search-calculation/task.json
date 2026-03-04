@@ -1,0 +1,10 @@
+{
+  "id": "09-web-search-calculation",
+  "name": "Web Search Calculation",
+  "capability": "web_search",
+  "time_limit_seconds": 150,
+  "prompt": "Search the web for facts, then use them to compute answers. Write results to `workspace/answers.json`.\n\n1. Find the average distance from Earth to Mars (in km) and from Earth to the Moon (in km). Compute the ratio (Mars distance / Moon distance) rounded to 1 decimal place.\n2. Find the boiling point of water in Fahrenheit. Convert it to Celsius using the formula C = (F - 32) * 5/9.\n3. Find the year the Eiffel Tower was completed and the year the Empire State Building was completed. Calculate the difference in years.\n\nFormat:\n{\"q1_mars_km\": 225000000, \"q1_moon_km\": 384400, \"q1_ratio\": 585.4, \"q2_fahrenheit\": 212, \"q2_celsius\": 100.0, \"q3_eiffel_year\": 1889, \"q3_empire_year\": 1931, \"q3_difference\": 42}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tools_hint": "web_search",
+  "tags": ["web_search", "calculation"]
+}

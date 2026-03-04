@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: CyberFort Security
+Contract ID: SVC-2024-003
+Effective Date: June 1, 2024
+Expiration Date: May 31, 2027
+Annual Value: $95,000
+
+Services Provided:
+- Managed firewall services
+- Intrusion detection/prevention
+- Quarterly penetration testing
+- Security incident response
+
+Terms:
+- Payment: Semi-annually
+- Auto-renewal: Yes, for successive 2-year terms
+- Termination notice: 120 days before expiration
+- Penalty for early termination: 50% of remaining value
+
+Contact: Lisa Park, lisa@cyberfort.example.com

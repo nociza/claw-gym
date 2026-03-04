@@ -1,0 +1,21 @@
+customer_id,name,email,region,joined_date
+1,Alice Johnson,alice@example.com,North,2024-01-15
+2,Bob Smith,bob@example.com,South,2024-02-20
+3,Carol Williams,carol@example.com,East,2024-03-10
+4,David Brown,david@example.com,West,2024-04-05
+5,Eva Martinez,eva@example.com,North,2024-05-12
+6,Frank Davis,frank@example.com,South,2024-06-18
+7,Grace Lee,grace@example.com,East,2024-07-22
+8,Henry Wilson,henry@example.com,West,2024-08-30
+9,Iris Taylor,iris@example.com,North,2024-09-14
+10,Jack Anderson,jack@example.com,South,2024-10-01
+11,Karen Thomas,karen@example.com,East,2024-10-15
+12,Leo Jackson,leo@example.com,West,2024-11-20
+13,Mia White,mia@example.com,North,2024-12-05
+14,Noah Harris,noah@example.com,South,2025-01-10
+15,Olivia Clark,olivia@example.com,East,2025-02-14
+16,Paul Lewis,paul@example.com,West,2025-03-20
+17,Quinn Walker,quinn@example.com,North,2025-04-25
+18,Rachel Hall,rachel@example.com,South,2025-05-30
+19,Sam Young,sam@example.com,East,2025-06-10
+20,Tina King,tina@example.com,West,2025-07-15

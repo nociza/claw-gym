@@ -1,0 +1,9 @@
+{
+  "id": "13-corpus-meeting-notes",
+  "name": "Corpus Meeting Notes",
+  "capability": "corpus_search",
+  "time_limit_seconds": 150,
+  "prompt": "The `seed/meetings/` directory contains 6 meeting note files. Read all meeting notes and answer these questions. Write answers to `workspace/answers.json`.\n\n1. How many unique attendees are there across all meetings? (integer)\n2. How many total action items are assigned across all meetings? (integer)\n3. How many action items are assigned to Sarah Chen? (integer)\n4. Which meetings discuss the topic of 'migration'? (list of filenames without extension)\n5. How many action items are marked as overdue or past their due date (before 2026-03-01)? (integer)\n\nFormat:\n{\"q1\": 12, \"q2\": 15, \"q3\": 3, \"q4\": [\"meeting-name\"], \"q5\": 5}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["corpus", "document_qa", "meeting_notes"]
+}

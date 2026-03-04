@@ -1,0 +1,9 @@
+{
+  "id": "01-generate-function",
+  "name": "Generate Function",
+  "capability": "code_generation",
+  "time_limit_seconds": 90,
+  "prompt": "Write a Python function in a file called `workspace/merge_intervals.py`. The function `merge_intervals(intervals: list[list[int]]) -> list[list[int]]` should take a list of intervals [start, end] and merge all overlapping intervals. Return the merged intervals sorted by start time.\n\nExamples:\n  merge_intervals([[1,3],[2,6],[8,10],[15,18]]) => [[1,6],[8,10],[15,18]]\n  merge_intervals([[1,4],[4,5]]) => [[1,5]]\n  merge_intervals([]) => []\n  merge_intervals([[1,4],[0,4]]) => [[0,4]]",
+  "expected_output_files": ["workspace/merge_intervals.py"],
+  "tags": ["coding", "generation", "algorithm"]
+}

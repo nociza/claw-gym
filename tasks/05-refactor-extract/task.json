@@ -1,9 +1,0 @@
-{
-  "id": "05-refactor-extract",
-  "name": "Refactor: Extract Helper",
-  "capability": "refactoring",
-  "time_limit_seconds": 120,
-  "prompt": "The file `seed/report.py` has repeated validation/formatting logic in three functions. Refactor it by:\n1. Extracting the repeated email validation into a helper function `validate_email(email: str) -> bool`\n2. Extracting the repeated name formatting into a helper function `format_name(first: str, last: str) -> str`\n3. All three original functions must still work identically after refactoring\n\nWrite the refactored file to `workspace/report.py`.",
-  "expected_output_files": ["workspace/report.py"],
-  "tags": ["refactoring", "dry", "extract"]
-}

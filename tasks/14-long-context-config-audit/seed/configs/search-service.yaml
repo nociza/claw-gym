@@ -1,0 +1,43 @@
+# Search Service Configuration
+service:
+  name: search-service
+  version: 1.8.0
+  environment: production
+
+server:
+  host: 127.0.0.1
+  port: 8085
+  workers: 4
+  debug: false
+
+logging:
+  level: info
+  format: json
+  output: /var/log/search-service/app.log
+
+elasticsearch:
+  hosts:
+    - "http://es-node1.internal:9200"
+    - "http://es-node2.internal:9200"
+  index_prefix: "app"
+  timeout: 30
+
+database:
+  host: db-replica.internal
+  port: 5432
+  name: search_db
+  user: search_user
+  password: ${DB_PASSWORD}
+  ssl: true
+  pool_size: 10
+
+health_check:
+  enabled: true
+  path: /health
+  interval: 30
+
+cache:
+  type: redis
+  host: redis.internal
+  port: 6379
+  ttl: 60

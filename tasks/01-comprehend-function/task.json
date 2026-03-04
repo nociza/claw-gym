@@ -1,9 +1,0 @@
-{
-  "id": "01-comprehend-function",
-  "name": "Comprehend Function",
-  "capability": "code_comprehension",
-  "time_limit_seconds": 60,
-  "prompt": "Read the file `seed/scheduler.py` and answer the following questions by writing your answers to a file called `answers.txt` in the workspace directory. Each answer should be on its own line, prefixed with the question number.\n\n1. What is the worst-case time complexity of the `schedule_jobs` function?\n2. What happens if two jobs have the same priority?\n3. What is the return type of `schedule_jobs`?\n4. Name the data structure used internally by the function.\n5. What exception does the function raise for invalid input?",
-  "expected_output_files": ["workspace/answers.txt"],
-  "tags": ["comprehension", "reading", "analysis"]
-}

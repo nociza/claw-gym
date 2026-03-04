@@ -1,0 +1,10 @@
+{
+  "id": "06-web-search-factual",
+  "name": "Web Search Factual",
+  "capability": "web_search",
+  "time_limit_seconds": 120,
+  "prompt": "Use web search to find the answers to these 5 factual questions, then write the answers to `workspace/answers.json` as a JSON object.\n\n1. What is the exact speed of light in meters per second (SI definition)?\n2. What is the ISO 3166-1 alpha-2 country code for Japan?\n3. In what year was Python (the programming language) first released?\n4. What is the chemical symbol for tungsten?\n5. What is the capital city of Australia?\n\nAlso write a file `workspace/searches.txt` listing each web search query you performed (one per line) as proof of search tool usage.\n\nFormat answers.json like:\n{\"q1\": \"299792458\", \"q2\": \"JP\", \"q3\": \"1991\", \"q4\": \"W\", \"q5\": \"Canberra\"}",
+  "expected_output_files": ["workspace/answers.json", "workspace/searches.txt"],
+  "tools_hint": "web_search",
+  "tags": ["web_search", "factual"]
+}

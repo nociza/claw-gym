@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: HyperScale Compute
+Contract ID: SVC-2024-008
+Effective Date: July 1, 2024
+Expiration Date: June 30, 2026
+Annual Value: $200,000
+
+Services Provided:
+- High-performance computing cluster
+- GPU instance management
+- Machine learning infrastructure
+- Dedicated technical account manager
+
+Terms:
+- Payment: Quarterly in advance
+- Auto-renewal: Yes, for successive 1-year terms
+- Termination notice: 60 days before expiration
+- Penalty for early termination: 40% of remaining value
+
+Contact: Kevin Zhao, kevin@hyperscale.example.com

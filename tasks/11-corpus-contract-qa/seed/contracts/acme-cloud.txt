@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: Acme Cloud Services
+Contract ID: SVC-2024-001
+Effective Date: January 1, 2024
+Expiration Date: December 31, 2026
+Annual Value: $120,000
+
+Services Provided:
+- Cloud hosting (AWS-equivalent)
+- 99.9% uptime SLA
+- 24/7 technical support
+- Disaster recovery
+
+Terms:
+- Payment: Quarterly in advance
+- Auto-renewal: Yes, for successive 1-year terms
+- Termination notice: 90 days before expiration
+- Penalty for early termination: 25% of remaining value
+
+Contact: Sarah Johnson, sarah@acmecloud.example.com

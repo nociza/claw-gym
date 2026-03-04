@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: BrightData Analytics
+Contract ID: SVC-2024-002
+Effective Date: March 1, 2024
+Expiration Date: February 28, 2026
+Annual Value: $85,000
+
+Services Provided:
+- Business intelligence platform
+- Custom dashboard development
+- Data warehouse integration
+- Monthly analytics reports
+
+Terms:
+- Payment: Monthly
+- Auto-renewal: No
+- Termination notice: 60 days
+- Penalty for early termination: None
+
+Contact: Mike Chen, mike@brightdata.example.com

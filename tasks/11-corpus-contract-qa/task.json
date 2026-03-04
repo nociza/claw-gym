@@ -1,0 +1,9 @@
+{
+  "id": "11-corpus-contract-qa",
+  "name": "Corpus Contract QA",
+  "capability": "corpus_search",
+  "time_limit_seconds": 150,
+  "prompt": "The `seed/contracts/` directory contains 8 service contract files. Read all contracts and answer these questions. Write answers to `workspace/answers.json`.\n\n1. Which vendor has the highest annual contract value? (vendor name)\n2. How many contracts have auto-renewal clauses? (integer)\n3. Which contracts expire in 2026? (list of vendor names)\n4. What is the total annual value of all contracts combined? (number)\n5. Which vendor has the shortest notice period for termination? (vendor name)\n\nFormat:\n{\"q1\": \"Vendor Name\", \"q2\": 3, \"q3\": [\"Vendor A\", \"Vendor B\"], \"q4\": 450000, \"q5\": \"Vendor Name\"}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["corpus", "document_qa", "contracts"]
+}

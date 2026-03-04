@@ -1,0 +1,11 @@
+{
+  "id": "17-web-fetch-api",
+  "name": "Web Fetch API",
+  "capability": "web_fetch",
+  "time_limit_seconds": 120,
+  "prompt": "Use web search to find the JSONPlaceholder API (a free fake REST API for testing). Then:\n\n1. Fetch the /users endpoint to get all users\n2. Fetch the /posts endpoint to get all posts\n3. Determine which user wrote the most posts\n4. Extract that user's name, email, and company name\n5. Count total posts and total users\n\nWrite results to `workspace/results.json`:\n{\"total_users\": 10, \"total_posts\": 100, \"most_prolific_user\": {\"name\": \"...\", \"email\": \"...\", \"company\": \"...\"}, \"most_prolific_post_count\": 10}",
+  "expected_output_files": ["workspace/results.json"],
+  "tools_hint": "web_search web_fetch",
+  "requires_network": true,
+  "tags": ["web_fetch", "api"]
+}

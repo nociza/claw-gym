@@ -1,0 +1,9 @@
+{
+  "id": "02-fix-logic-bug",
+  "name": "Fix Logic Bug",
+  "capability": "bug_fix_logic",
+  "time_limit_seconds": 90,
+  "prompt": "The file `seed/inventory.py` contains an `Inventory` class that tracks product stock. There are logic bugs causing incorrect behavior. Users report:\n\n1. `restock` sometimes silently ignores valid restock amounts\n2. `sell` allows selling more items than are in stock\n3. `total_value` returns wrong results when there are multiple products\n\nFix the bugs and write the corrected file to `workspace/inventory.py`. Do NOT change the class interface (method signatures).",
+  "expected_output_files": ["workspace/inventory.py"],
+  "tags": ["coding", "bugfix", "logic", "debugging"]
+}

@@ -1,0 +1,16 @@
+product_id,name,category,price
+101,Laptop Pro,Electronics,999.99
+102,Wireless Mouse,Electronics,29.99
+103,USB-C Hub,Electronics,49.99
+104,Desk Chair,Furniture,299.99
+105,Standing Desk,Furniture,449.99
+106,Monitor Arm,Furniture,79.99
+107,Python Cookbook,Books,39.99
+108,Data Science Guide,Books,44.99
+109,Cloud Architecture,Books,54.99
+110,Mechanical Keyboard,Electronics,149.99
+111,Webcam HD,Electronics,69.99
+112,Desk Lamp,Furniture,34.99
+113,Bookshelf,Furniture,129.99
+114,Headphones,Electronics,199.99
+115,Notebook Set,Books,19.99

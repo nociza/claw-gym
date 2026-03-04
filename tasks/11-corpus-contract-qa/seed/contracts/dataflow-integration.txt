@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: DataFlow Integration
+Contract ID: SVC-2024-004
+Effective Date: February 1, 2024
+Expiration Date: January 31, 2026
+Annual Value: $65,000
+
+Services Provided:
+- API integration platform
+- ETL pipeline management
+- Real-time data synchronization
+- Technical documentation
+
+Terms:
+- Payment: Quarterly
+- Auto-renewal: No
+- Termination notice: 30 days
+- Penalty for early termination: None
+
+Contact: James Wright, james@dataflow.example.com

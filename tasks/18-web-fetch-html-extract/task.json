@@ -1,0 +1,11 @@
+{
+  "id": "18-web-fetch-html-extract",
+  "name": "Web Fetch HTML Extract",
+  "capability": "web_fetch",
+  "time_limit_seconds": 150,
+  "prompt": "Use web search to find the Wikipedia article about the largest cities in the world by population. Then fetch the page and extract:\n\n1. The name of the city ranked #1 by population (city proper)\n2. The name of the city ranked #2 by population (city proper)\n3. The country each city is in\n4. The approximate population of the #1 city (in millions)\n5. Based on the top 10 cities, which continent has the most entries?\n\nWrite results to `workspace/results.json`:\n{\"city_1\": \"Tokyo\", \"city_2\": \"Delhi\", \"country_1\": \"Japan\", \"country_2\": \"India\", \"population_1_millions\": 13.96, \"top_continent\": \"Asia\"}",
+  "expected_output_files": ["workspace/results.json"],
+  "tools_hint": "web_search web_fetch",
+  "requires_network": true,
+  "tags": ["web_fetch", "html_extraction"]
+}

@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: GreenLeaf Consulting
+Contract ID: SVC-2024-007
+Effective Date: May 1, 2024
+Expiration Date: April 30, 2026
+Annual Value: $75,000
+
+Services Provided:
+- IT strategy consulting
+- Digital transformation roadmap
+- Vendor evaluation services
+- Quarterly business reviews
+
+Terms:
+- Payment: Monthly
+- Auto-renewal: No
+- Termination notice: 45 days
+- Penalty for early termination: 15% of remaining value
+
+Contact: Diana Ross, diana@greenleaf.example.com

@@ -81,12 +81,10 @@ def stage_task(task: dict, claw: str) -> Path:
     seed_staging.mkdir(parents=True)
     output_staging.mkdir(parents=True)
 
-    # Copy seed files
+    # Copy seed files (supports nested subdirectories)
     seed_dir = task_dir / "seed"
     if seed_dir.exists():
-        for f in seed_dir.iterdir():
-            if f.is_file():
-                shutil.copy2(f, seed_staging / f.name)
+        shutil.copytree(seed_dir, seed_staging, dirs_exist_ok=True)
 
     return staging
 
@@ -185,6 +183,17 @@ def build_agent_prompt(task: dict, staging: Path, claw: str) -> str:
     prompt = prompt.replace("seed/", f"{seed_rel}/")
     prompt = prompt.replace("workspace/", f"{output_rel}/")
 
+    # Tools hint: add context-specific tool instructions
+    tools_hint = task.get("tools_hint", "")
+    if tools_hint:
+        prompt += "\n\nTOOL GUIDANCE:"
+        if "web_search" in tools_hint:
+            prompt += "\n- You have access to web_search tool. Use it to find information."
+        if "web_fetch" in tools_hint:
+            prompt += "\n- You have access to web_fetch tool to retrieve content from URLs."
+            prompt += "\n- Use web_search first to find URLs, then web_fetch to retrieve content."
+        prompt += "\n- After finding/processing information, write results using file_write."
+
     # Critical: explicit tool-use instructions to prevent hallucination
     prompt += (
         f"\n\nCRITICAL INSTRUCTIONS:"
@@ -194,6 +203,16 @@ def build_agent_prompt(task: dict, staging: Path, claw: str) -> str:
         f"\n- Call file_write for EVERY output file. Do not skip any tool calls."
     )
     return prompt
+
+
+def check_network() -> bool:
+    """Quick check if network is available."""
+    import socket
+    try:
+        socket.create_connection(("8.8.8.8", 53), timeout=3)
+        return True
+    except OSError:
+        return False
 
 
 def check_claw_auth(claw: str, binary: str) -> tuple[bool, str]:
@@ -361,16 +380,20 @@ def main() -> None:
     parser.add_argument("--timeout", type=int, default=0, help="Override task time limit")
     parser.add_argument("--dry-run", action="store_true", help="Show tasks without running")
     parser.add_argument("--list", action="store_true", dest="list_tasks", help="List all tasks")
+    parser.add_argument("--tag", help="Filter tasks by tag (e.g. web_search, coding, corpus, long_context, web_fetch)")
     args = parser.parse_args()
 
     tasks = discover_tasks(args.task)
+    if args.tag:
+        tasks = [t for t in tasks if args.tag in t.get("tags", [])]
     claws = [args.claw] if args.claw else list(CLAW_BINARIES.keys())
 
     if args.list_tasks:
-        print(f"\n{'ID':<30} {'Capability':<25} {'Time':>6}")
-        print("-" * 65)
+        print(f"\n{'ID':<30} {'Capability':<25} {'Time':>6}  {'Tags'}")
+        print("-" * 90)
         for task in tasks:
-            print(f"{task['id']:<30} {task['capability']:<25} {task['time_limit_seconds']:>4}s")
+            tags = ", ".join(task.get("tags", []))
+            print(f"{task['id']:<30} {task['capability']:<25} {task['time_limit_seconds']:>4}s  {tags}")
         return
 
     if not tasks:
@@ -393,6 +416,19 @@ def main() -> None:
             timeout = args.timeout or task["time_limit_seconds"]
 
             print(f"\n>>> [{claw}] {task_id} (timeout: {timeout}s)")
+
+            # Network pre-flight check for tasks that require it
+            if task.get("requires_network", False) and not check_network():
+                print("    SKIP: network unavailable (task requires internet)")
+                all_results.append({
+                    "task_id": task_id,
+                    "capability": task.get("capability", ""),
+                    "claw": claw,
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "run": {"status": "skip", "error": "Network unavailable", "elapsed_seconds": 0, "stdout": "", "stderr": ""},
+                    "verify": {"passed": False, "message": "Skipped: network unavailable"},
+                })
+                continue
 
             # Stage seed files into the claw's workspace
             staging = stage_task(task, claw)

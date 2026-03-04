@@ -1,0 +1,10 @@
+{
+  "id": "08-web-search-technical",
+  "name": "Web Search Technical",
+  "capability": "web_search",
+  "time_limit_seconds": 120,
+  "prompt": "Use web search to find answers to these 6 technical questions. Write answers to `workspace/answers.json`.\n\n1. What PEP number introduced Python's 'with' statement?\n2. What HTTP status code means 'Too Many Requests'?\n3. In what year was the first version of Git released?\n4. What git config key sets the default branch name?\n5. How many bits are in an IPv6 address?\n6. Who created the Linux kernel?\n\nFormat:\n{\"q1\": \"343\", \"q2\": \"429\", \"q3\": \"2005\", \"q4\": \"init.defaultBranch\", \"q5\": \"128\", \"q6\": \"Linus Torvalds\"}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tools_hint": "web_search",
+  "tags": ["web_search", "technical"]
+}

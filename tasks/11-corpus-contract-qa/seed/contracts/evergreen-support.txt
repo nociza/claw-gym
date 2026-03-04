@@ -1,0 +1,21 @@
+SERVICE CONTRACT
+================
+Vendor: Evergreen Support
+Contract ID: SVC-2024-005
+Effective Date: April 1, 2024
+Expiration Date: March 31, 2027
+Annual Value: $45,000
+
+Services Provided:
+- Help desk support (Tier 1-2)
+- Ticket management system
+- Knowledge base maintenance
+- Monthly service reports
+
+Terms:
+- Payment: Monthly
+- Auto-renewal: Yes, for successive 1-year terms
+- Termination notice: 60 days before expiration
+- Penalty for early termination: 10% of remaining value
+
+Contact: Amy Torres, amy@evergreen.example.com

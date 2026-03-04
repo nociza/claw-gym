@@ -1,0 +1,307 @@
+[
+  {
+    "task_id": "01-generate-function",
+    "capability": "code_generation",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:42:58.349673+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 5.3,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I wrote `merge_intervals` to the required location:\n\n`claw-gym/01-generate-function/output/merge_intervals.py`\n",
+      "stderr": "erate-function/seed -maxdepth 2 -type f -print]}\n2026/03/04 00:42:56 [2026-03-04T00:42:56Z] [INFO] tool: Tool execution completed {tool=exec, duration_ms=2, result_length=11}\n2026/03/04 00:42:57 [2026-03-04T00:42:57Z] [INFO] agent: LLM requested tool calls {iteration=3, agent_id=main, tools=[write_file], count=1}\n2026/03/04 00:42:57 [2026-03-04T00:42:57Z] [INFO] agent: Tool call: write_file({\"content\":\"from __future__ import annotations\\n\\n\\ndef merge_intervals(intervals: list[list[int]]) -\\u003e list[list[int]]:\\n    \\\"\\\"\\\"Merge overlapping [start, end] intervals and return sorted re...) {agent_id=main, tool=write_file, iteration=3}\n2026/03/04 00:42:57 [2026-03-04T00:42:57Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:from __future__ import annotations\n\n\ndef merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    \"\"\"Merge overlapping [start, end] intervals and return sorted results.\"\"\"\n    if not intervals:\n        return []\n\n    intervals_sorted = sorted(intervals, key=lambda x: x[0])\n\n    merged: list[list[int]] = [intervals_sorted[0][:]]\n    for start, end in intervals_sorted[1:]:\n        last_start, last_end = merged[-1]\n        if start <= last_end:  # overlap or touch\n            merged[-1][1] = max(last_end, end)\n        else:\n            merged.append([start, end])\n\n    return merged\n path:/home/sandbox/.picoclaw/workspace/claw-gym/01-generate-function/output/merge_intervals.py]}\n2026/03/04 00:42:57 [2026-03-04T00:42:57Z] [INFO] tool: Tool execution completed {duration_ms=81, result_length=103, tool=write_file}\n2026/03/04 00:42:58 [2026-03-04T00:42:58Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=4, content_chars=119}\n2026/03/04 00:42:58 [2026-03-04T00:42:58Z] [INFO] agent: Response: Done \u2014 I wrote `merge_intervals` to the required location:\n\n`claw-gym/01-generate-function/output/merge_intervals.py` {agent_id=main, session_key=agent:main:main, iterations=4, final_length=119}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "8/8 test cases passed"
+    }
+  },
+  {
+    "task_id": "02-fix-logic-bug",
+    "capability": "bug_fix_logic",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:43:03.194326+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 4.83,
+      "stdout": "\n\ud83e\udd9e Done \u2014 fixed all reported logic bugs and wrote the corrected file to:\n\n`claw-gym/02-fix-logic-bug/output/inventory.py` \n\nChanges:\n- `restock` now adds to existing quantity (`+=`) and validates positive amounts.\n- `sell` now prevents selling more than available stock.\n- `total_value` now accumulates across all products (`+=`).\n",
+      "stderr": "ists\")\n        self._products[name] = {\"price\": price, \"quantity\": quantity}\n\n    def restock(self, name: str, amount: int) -> int:\n        \"\"\"Add stock. Returns new quantity.\"\"\"\n        product = self._get_product(name)\n        if amount <= 0:\n            raise ValueError(\"Amount must be positive\")\n        product[\"quantity\"] += amount\n        return product[\"quantity\"]\n\n    def sell(self, name: str, amount: int) -> float:\n        \"\"\"Sell items. Returns total sale price.\"\"\"\n        product = self._get_product(name)\n        if amount <= 0:\n            raise ValueError(\"Amount must be positive\")\n        if amount > product[\"quantity\"]:\n            raise ValueError(\"Insufficient stock\")\n        product[\"quantity\"] -= amount\n        return product[\"price\"] * amount\n\n    def get_quantity(self, name: str) -> int:\n        \"\"\"Get current stock level.\"\"\"\n        return self._get_product(name)[\"quantity\"]\n\n    def total_value(self) -> float:\n        \"\"\"Calculate total inventory value (price * quantity for all products).\"\"\"\n        total = 0.0\n        for product in self._products.values():\n            total += product[\"price\"] * product[\"quantity\"]\n        return total\n\n    def _get_product(self, name: str) -> dict:\n        if name not in self._products:\n            raise KeyError(f\"Product '{name}' not found\")\n        return self._products[name]\n path:/home/sandbox/.picoclaw/workspace/claw-gym/02-fix-logic-bug/output/inventory.py]}\n2026/03/04 00:43:01 [2026-03-04T00:43:01Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=106, result_length=93}\n2026/03/04 00:43:03 [2026-03-04T00:43:03Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=3, content_chars=329}\n2026/03/04 00:43:03 [2026-03-04T00:43:03Z] [INFO] agent: Response: Done \u2014 fixed all reported logic bugs and wrote the corrected file to:\n\n`claw-gym/02-fix-logic-bug/output/inventory.py... {iterations=3, final_length=329, agent_id=main, session_key=agent:main:main}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "4/4 checks passed. restock-add: PASS; sell-overstock: PASS; total-value: PASS; sell-normal: PASS"
+    }
+  },
+  {
+    "task_id": "03-shell-data-query",
+    "capability": "shell_tool_usage",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:43:10.798517+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 7.6,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I analyzed `access.log` and wrote the report to:\n\n`claw-gym/03-shell-data-query/output/report.txt` with the requested numbered format.\n",
+      "stderr": "03-shell-data-query/seed \\u0026\\u0026 awk '{print $1}' access.log | sort | uniq | wc -l \\u0026\\u0026 awk '{print $1}' access.log | sort | u...) {agent_id=main, tool=exec, iteration=3}\n2026/03/04 00:43:07 [2026-03-04T00:43:07Z] [INFO] tool: Tool execution started {tool=exec, args=map[command:cd /home/sandbox/.picoclaw/workspace/claw-gym/03-shell-data-query/seed && awk '{print $1}' access.log | sort | uniq | wc -l && awk '{print $1}' access.log | sort | uniq -c | sort -nr | head -n1 | awk '{print $2}' && awk '$9==404' access.log | wc -l && awk '{print $7}' access.log | sort | uniq -c | sort -nr | head -n1 | awk '{print $2}' && wc -l < access.log]}\n2026/03/04 00:43:07 [2026-03-04T00:43:07Z] [INFO] tool: Tool execution completed {tool=exec, duration_ms=20, result_length=31}\n2026/03/04 00:43:09 [2026-03-04T00:43:09Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=4}\n2026/03/04 00:43:09 [2026-03-04T00:43:09Z] [INFO] agent: Tool call: write_file({\"content\":\"1. 20\\n2. 5\\n3. 192.168.1.10\\n4. 3\\n5. /api/users\",\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/03-shell-data-query/output/report.txt\"}) {agent_id=main, tool=write_file, iteration=4}\n2026/03/04 00:43:09 [2026-03-04T00:43:09Z] [INFO] tool: Tool execution started {args=map[content:1. 20\n2. 5\n3. 192.168.1.10\n4. 3\n5. /api/users path:/home/sandbox/.picoclaw/workspace/claw-gym/03-shell-data-query/output/report.txt], tool=write_file}\n2026/03/04 00:43:09 [2026-03-04T00:43:09Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=69, result_length=94}\n2026/03/04 00:43:10 [2026-03-04T00:43:10Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=5, content_chars=143}\n2026/03/04 00:43:10 [2026-03-04T00:43:10Z] [INFO] agent: Response: Done \u2014 I analyzed `access.log` and wrote the report to:\n\n`claw-gym/03-shell-data-query/output/report.txt` with the re... {agent_id=main, session_key=agent:main:main, iterations=5, final_length=143}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 answers correct. Q1: PASS; Q2: PASS; Q3: PASS; Q4: PASS; Q5: PASS"
+    }
+  },
+  {
+    "task_id": "04-multi-file-feature",
+    "capability": "multi_file_editing",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:43:18.354414+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 7.54,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I added the requested tagging and search features and wrote both updated files to:\n\n- `claw-gym/04-multi-file-feature/output/models.py`\n- `claw-gym/04-multi-file-feature/output/store.py`  \n\nIf you want, I can also add small tests for these new methods.\n",
+      "stderr": ",\n            title=title,\n            content=content,\n            created_at=datetime.now(),\n            tags=tags or [],\n        )\n        self._notes[note.id] = note\n        self._next_id += 1\n        return note\n\n    def get(self, note_id: int) -> Note | None:\n        \"\"\"Get a note by ID.\"\"\"\n        return self._notes.get(note_id)\n\n    def list_all(self) -> list[Note]:\n        \"\"\"List all notes ordered by creation time.\"\"\"\n        return sorted(self._notes.values(), key=lambda n: n.created_at)\n\n    def delete(self, note_id: int) -> bool:\n        \"\"\"Delete a note. Returns True if found and deleted.\"\"\"\n        if note_id in self._notes:\n            del self._notes[note_id]\n            return True\n        return False\n\n    def search(self, query: str) -> list[Note]:\n        \"\"\"Search notes by title, content, or tags (case-insensitive).\"\"\"\n        q = query.lower()\n        return [\n            note\n            for note in self._notes.values()\n            if q in note.title.lower()\n            or q in note.content.lower()\n            or any(q == tag.lower() for tag in note.tags)\n        ]\n\n    def get_by_tag(self, tag: str) -> list[Note]:\n        \"\"\"Return all notes matching a given tag (case-insensitive).\"\"\"\n        target = tag.lower()\n        return [note for note in self._notes.values() if any(target == t.lower() for t in note.tags)]\n path:/home/sandbox/.picoclaw/workspace/claw-gym/04-multi-file-feature/output/store.py]}\n2026/03/04 00:43:16 [2026-03-04T00:43:16Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=65, result_length=94}\n2026/03/04 00:43:18 [2026-03-04T00:43:18Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=5, content_chars=261}\n2026/03/04 00:43:18 [2026-03-04T00:43:18Z] [INFO] agent: Response: Done \u2014 I added the requested tagging and search features and wrote both updated files to:\n\n- `claw-gym/04-multi-file-... {agent_id=main, session_key=agent:main:main, iterations=5, final_length=261}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "6/6 checks passed. tags-field: PASS; tags-default: PASS; search: PASS; search-case: PASS; get_by_tag: PASS; search-tags: PASS"
+    }
+  },
+  {
+    "task_id": "05-iterative-debug",
+    "capability": "iterative_debugging",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:43:35.434820+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 17.04,
+      "stdout": "\n\ud83e\udd9e Implemented and verified.\n\n- Ran the seed script and confirmed the crash was a `ZeroDivisionError` in CV calculation (`stdev / mean`) when dataset mean is `0`.\n- Fixed it by setting `cv` to `None` when mean is zero.\n- Wrote corrected file to:\n\n`claw-gym/05-iterative-debug/output/stats.py`\n\n- Re-ran the corrected script from output path successfully; it prints valid JSON and writes `output/report.json`.\n",
+      "stderr": "tasets\"].values()]\n    report[\"summary\"] = {\n        \"num_datasets\": len(datasets),\n        \"grand_mean\": round(sum(all_means) / len(all_means), 4),\n    }\n    return report\n\n\nif __name__ == \"__main__\":\n    datasets = {\n        \"scores\": [85, 92, 78, 95, 88, 76, 91, 84, 90, 87],\n        \"temperatures\": [72.1, 68.5, 75.3, 69.8, 71.2, 73.6, 70.0, 74.5],\n        \"deltas\": [-3, 5, -2, 7, -5, 3, -1, 4, -8, 0],\n    }\n\n    report = generate_report(datasets)\n    print(json.dumps(report, indent=2))\n\n    output = Path(__file__).parent / \"report.json\"\n    output.write_text(json.dumps(report, indent=2))\n    print(f\"\\nReport written to {output}\")\n path:/home/sandbox/.picoclaw/workspace/claw-gym/05-iterative-debug/output/stats.py]}\n2026/03/04 00:43:29 [2026-03-04T00:43:29Z] [INFO] tool: Tool execution completed {result_length=91, tool=write_file, duration_ms=55}\n2026/03/04 00:43:33 [2026-03-04T00:43:33Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[exec], count=1, iteration=4}\n2026/03/04 00:43:33 [2026-03-04T00:43:33Z] [INFO] agent: Tool call: exec({\"command\":\"python3 /home/sandbox/.picoclaw/workspace/claw-gym/05-iterative-debug/output/stats.py\",\"max_output_tokens\":12000}) {agent_id=main, tool=exec, iteration=4}\n2026/03/04 00:43:33 [2026-03-04T00:43:33Z] [INFO] tool: Tool execution started {tool=exec, args=map[command:python3 /home/sandbox/.picoclaw/workspace/claw-gym/05-iterative-debug/output/stats.py max_output_tokens:12000]}\n2026/03/04 00:43:33 [2026-03-04T00:43:33Z] [INFO] tool: Tool execution completed {tool=exec, duration_ms=37, result_length=735}\n2026/03/04 00:43:35 [2026-03-04T00:43:35Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=5, content_chars=405}\n2026/03/04 00:43:35 [2026-03-04T00:43:35Z] [INFO] agent: Response: Implemented and verified.\n\n- Ran the seed script and confirmed the crash was a `ZeroDivisionError` in CV calculation ... {agent_id=main, session_key=agent:main:main, iterations=5, final_length=405}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 checks passed. compiles: PASS; runs: PASS; compute_stats: PASS; zero-mean: PASS; all-datasets: PASS"
+    }
+  },
+  {
+    "task_id": "06-web-search-factual",
+    "capability": "web_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:45:35.451761+00:00",
+    "run": {
+      "status": "timeout",
+      "elapsed_seconds": 120.01,
+      "stdout": "",
+      "stderr": "Timed out after 120s"
+    },
+    "verify": {
+      "passed": false,
+      "message": "Run status: timeout"
+    }
+  },
+  {
+    "task_id": "07-web-search-research",
+    "capability": "web_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:46:05.234174+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 29.77,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I wrote the requested country comparison data to:\n\n`claw-gym/07-web-search-research/output/countries.json`\n\nApproximate values used:\n- Russia: population ~144M, area 17,098,242 km\u00b2, GDP ~2.17T USD  \n- Canada: population ~41M, area 9,984,670 km\u00b2, GDP ~2.2T USD  \n- USA: population ~340M, area 9,833,517 km\u00b2, GDP ~28.75T USD\n\n\n",
+      "stderr": "ead_file, iteration=6}\n2026/03/04 00:45:50 [2026-03-04T00:45:50Z] [INFO] tool: Tool execution started {args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/07-web-search-research/seed/.gitkeep], tool=read_file}\n2026/03/04 00:45:50 [2026-03-04T00:45:50Z] [ERROR] tool: Tool execution failed {duration=0, error=failed to read file: file not found: openat claw-gym/07-web-search-research/seed/.gitkeep: no such file or directory, tool=read_file}\n2026/03/04 00:46:03 [2026-03-04T00:46:03Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=7}\n2026/03/04 00:46:03 [2026-03-04T00:46:03Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\n  \\\"russia\\\": {\\n    \\\"population_millions\\\": 144,\\n    \\\"area_sq_km\\\": 17098242,\\n    \\\"gdp_trillions_usd\\\": 2.17\\n  },\\n  \\\"canada\\\": {\\n    \\\"population_millions\\\": 41,\\n    \\\"are...) {agent_id=main, tool=write_file, iteration=7}\n2026/03/04 00:46:03 [2026-03-04T00:46:03Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\n  \"russia\": {\n    \"population_millions\": 144,\n    \"area_sq_km\": 17098242,\n    \"gdp_trillions_usd\": 2.17\n  },\n  \"canada\": {\n    \"population_millions\": 41,\n    \"area_sq_km\": 9984670,\n    \"gdp_trillions_usd\": 2.2\n  },\n  \"usa\": {\n    \"population_millions\": 340,\n    \"area_sq_km\": 9833517,\n    \"gdp_trillions_usd\": 28.75\n  }\n} path:/home/sandbox/.picoclaw/workspace/claw-gym/07-web-search-research/output/countries.json]}\n2026/03/04 00:46:03 [2026-03-04T00:46:03Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=116, result_length=101}\n2026/03/04 00:46:05 [2026-03-04T00:46:05Z] [INFO] agent: LLM response without tool calls (direct answer) {content_chars=336, agent_id=main, iteration=8}\n2026/03/04 00:46:05 [2026-03-04T00:46:05Z] [INFO] agent: Response: Done \u2014 I wrote the requested country comparison data to:\n\n`claw-gym/07-web-search-research/output/countries.json`\n\nAp... {agent_id=main, session_key=agent:main:main, iterations=8, final_length=336}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "9/9 metrics in acceptable range"
+    }
+  },
+  {
+    "task_id": "08-web-search-technical",
+    "capability": "web_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:47:53.766569+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 108.53,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I wrote the answers to:\n\n`claw-gym/08-web-search-technical/output/answers.json`\n",
+      "stderr": "gent: LLM requested tool calls {agent_id=main, tools=[read_file], count=1, iteration=5}\n2026/03/04 00:47:40 [2026-03-04T00:47:40Z] [INFO] agent: Tool call: read_file({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/08-web-search-technical/output\"}) {agent_id=main, tool=read_file, iteration=5}\n2026/03/04 00:47:40 [2026-03-04T00:47:40Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/08-web-search-technical/output]}\n2026/03/04 00:47:40 [2026-03-04T00:47:40Z] [ERROR] tool: Tool execution failed {duration=0, error=failed to read file: read /home/sandbox/.picoclaw/workspace/claw-gym/08-web-search-technical/output: is a directory, tool=read_file}\n2026/03/04 00:47:52 [2026-03-04T00:47:52Z] [INFO] agent: LLM requested tool calls {iteration=6, agent_id=main, tools=[write_file], count=1}\n2026/03/04 00:47:52 [2026-03-04T00:47:52Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":\\\"343\\\",\\\"q2\\\":\\\"429\\\",\\\"q3\\\":\\\"2005\\\",\\\"q4\\\":\\\"init.defaultBranch\\\",\\\"q5\\\":\\\"128\\\",\\\"q6\\\":\\\"Linus Torvalds\\\"}\",\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/08-web-search-...) {agent_id=main, tool=write_file, iteration=6}\n2026/03/04 00:47:52 [2026-03-04T00:47:52Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":\"343\",\"q2\":\"429\",\"q3\":\"2005\",\"q4\":\"init.defaultBranch\",\"q5\":\"128\",\"q6\":\"Linus Torvalds\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/08-web-search-technical/output/answers.json]}\n2026/03/04 00:47:52 [2026-03-04T00:47:52Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=92, result_length=100}\n2026/03/04 00:47:53 [2026-03-04T00:47:53Z] [INFO] agent: LLM response without tool calls (direct answer) {content_chars=88, agent_id=main, iteration=7}\n2026/03/04 00:47:53 [2026-03-04T00:47:53Z] [INFO] agent: Response: Done \u2014 I wrote the answers to:\n\n`claw-gym/08-web-search-technical/output/answers.json` {iterations=7, final_length=88, agent_id=main, session_key=agent:main:main}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "6/6 technical facts correct. q1: PASS; q2: PASS; q3: PASS; q4: PASS; q5: PASS; q6: PASS"
+    }
+  },
+  {
+    "task_id": "09-web-search-calculation",
+    "capability": "web_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:48:27.894494+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 34.12,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I wrote the requested computed answers to:\n\n`claw-gym/09-web-search-calculation/output/answers.json`\n",
+      "stderr": "4T00:48:23Z] [INFO] agent: Tool call: read_file({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/09-web-search-calculation/seed/.gitkeep\"}) {agent_id=main, tool=read_file, iteration=8}\n2026/03/04 00:48:23 [2026-03-04T00:48:23Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/09-web-search-calculation/seed/.gitkeep]}\n2026/03/04 00:48:23 [2026-03-04T00:48:23Z] [ERROR] tool: Tool execution failed {tool=read_file, duration=0, error=failed to read file: file not found: openat claw-gym/09-web-search-calculation/seed/.gitkeep: no such file or directory}\n2026/03/04 00:48:24 [2026-03-04T00:48:24Z] [INFO] agent: LLM requested tool calls {count=1, iteration=9, agent_id=main, tools=[write_file]}\n2026/03/04 00:48:24 [2026-03-04T00:48:24Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1_mars_km\\\":225000000,\\\"q1_moon_km\\\":384400,\\\"q1_ratio\\\":585.4,\\\"q2_fahrenheit\\\":212,\\\"q2_celsius\\\":100.0,\\\"q3_eiffel_year\\\":1889,\\\"q3_empire_year\\\":1931,\\\"q3_difference\\\":42}\",\"pat...) {agent_id=main, tool=write_file, iteration=9}\n2026/03/04 00:48:24 [2026-03-04T00:48:24Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1_mars_km\":225000000,\"q1_moon_km\":384400,\"q1_ratio\":585.4,\"q2_fahrenheit\":212,\"q2_celsius\":100.0,\"q3_eiffel_year\":1889,\"q3_empire_year\":1931,\"q3_difference\":42} path:/home/sandbox/.picoclaw/workspace/claw-gym/09-web-search-calculation/output/answers.json]}\n2026/03/04 00:48:24 [2026-03-04T00:48:24Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=52, result_length=102}\n2026/03/04 00:48:27 [2026-03-04T00:48:27Z] [INFO] agent: LLM response without tool calls (direct answer) {iteration=10, content_chars=109, agent_id=main}\n2026/03/04 00:48:27 [2026-03-04T00:48:27Z] [INFO] agent: Response: Done \u2014 I wrote the requested computed answers to:\n\n`claw-gym/09-web-search-calculation/output/answers.json` {session_key=agent:main:main, iterations=10, final_length=109, agent_id=main}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 calculations correct. q1_ratio: PASS; q2_celsius: PASS; q3_eiffel_year: PASS; q3_empire_year: PASS; q3_difference: PASS"
+    }
+  },
+  {
+    "task_id": "10-web-search-current-info",
+    "capability": "web_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:48:36.112879+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 8.2,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I wrote the requested answers to:\n\n`claw-gym/10-web-search-current-info/output/answers.json`\n",
+      "stderr": ":32 [2026-03-04T00:48:32Z] [INFO] agent: Tool call: read_file({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/10-web-search-current-info/seed/.gitkeep\"}) {agent_id=main, tool=read_file, iteration=2}\n2026/03/04 00:48:32 [2026-03-04T00:48:32Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/10-web-search-current-info/seed/.gitkeep]}\n2026/03/04 00:48:32 [2026-03-04T00:48:32Z] [ERROR] tool: Tool execution failed {error=failed to read file: file not found: openat claw-gym/10-web-search-current-info/seed/.gitkeep: no such file or directory, tool=read_file, duration=0}\n2026/03/04 00:48:34 [2026-03-04T00:48:34Z] [INFO] agent: LLM requested tool calls {count=1, iteration=3, agent_id=main, tools=[write_file]}\n2026/03/04 00:48:34 [2026-03-04T00:48:34Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":[\\\"China\\\",\\\"France\\\",\\\"Russia\\\",\\\"United Kingdom\\\",\\\"United States\\\"],\\\"q2\\\":\\\"JPY\\\",\\\"q3\\\":\\\"Burj Khalifa\\\",\\\"q4\\\":[\\\"blue\\\",\\\"yellow\\\",\\\"black\\\",\\\"green\\\",\\\"red\\\"],\\\"q5\\\":\\\"G...) {agent_id=main, tool=write_file, iteration=3}\n2026/03/04 00:48:34 [2026-03-04T00:48:34Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":[\"China\",\"France\",\"Russia\",\"United Kingdom\",\"United States\"],\"q2\":\"JPY\",\"q3\":\"Burj Khalifa\",\"q4\":[\"blue\",\"yellow\",\"black\",\"green\",\"red\"],\"q5\":\"Gold\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/10-web-search-current-info/output/answers.json]}\n2026/03/04 00:48:34 [2026-03-04T00:48:34Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=49, result_length=103}\n2026/03/04 00:48:36 [2026-03-04T00:48:36Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=4, content_chars=101}\n2026/03/04 00:48:36 [2026-03-04T00:48:36Z] [INFO] agent: Response: Done \u2014 I wrote the requested answers to:\n\n`claw-gym/10-web-search-current-info/output/answers.json` {agent_id=main, session_key=agent:main:main, iterations=4, final_length=101}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 facts correct. q1-un: PASS; q2-currency: PASS; q3-building: PASS; q4-colors: PASS; q5-element: PASS"
+    }
+  },
+  {
+    "task_id": "11-corpus-contract-qa",
+    "capability": "corpus_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:48:54.554936+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 18.43,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I read all 8 contracts and wrote the answers to:\n\n`claw-gym/11-corpus-contract-qa/output/answers.json`\n\nComputed results:\n- q1: HyperScale Compute\n- q2: 5\n- q3: [\"Acme Cloud Services\", \"BrightData Analytics\", \"DataFlow Integration\", \"Frontline Network\", \"GreenLeaf Consulting\", \"HyperScale Compute\"]\n- q4: 835000\n- q5: DataFlow Integration\n",
+      "stderr": "3-04T00:48:50Z] [INFO] agent: Tool call: read_file({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/11-corpus-contract-qa/seed/contracts/hyperscale-compute.txt\"}) {agent_id=main, tool=read_file, iteration=9}\n2026/03/04 00:48:50 [2026-03-04T00:48:50Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/11-corpus-contract-qa/seed/contracts/hyperscale-compute.txt]}\n2026/03/04 00:48:50 [2026-03-04T00:48:50Z] [INFO] tool: Tool execution completed {tool=read_file, duration_ms=0, result_length=569}\n2026/03/04 00:48:52 [2026-03-04T00:48:52Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=10}\n2026/03/04 00:48:52 [2026-03-04T00:48:52Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":\\\"HyperScale Compute\\\",\\\"q2\\\":5,\\\"q3\\\":[\\\"Acme Cloud Services\\\",\\\"BrightData Analytics\\\",\\\"DataFlow Integration\\\",\\\"Frontline Network\\\",\\\"GreenLeaf Consulting\\\",\\\"HyperScale Com...) {agent_id=main, tool=write_file, iteration=10}\n2026/03/04 00:48:52 [2026-03-04T00:48:52Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":\"HyperScale Compute\",\"q2\":5,\"q3\":[\"Acme Cloud Services\",\"BrightData Analytics\",\"DataFlow Integration\",\"Frontline Network\",\"GreenLeaf Consulting\",\"HyperScale Compute\"],\"q4\":835000,\"q5\":\"DataFlow Integration\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/11-corpus-contract-qa/output/answers.json]}\n2026/03/04 00:48:52 [2026-03-04T00:48:52Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=58, result_length=98}\n2026/03/04 00:48:54 [2026-03-04T00:48:54Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=11, content_chars=348}\n2026/03/04 00:48:54 [2026-03-04T00:48:54Z] [INFO] agent: Response: Done \u2014 I read all 8 contracts and wrote the answers to:\n\n`claw-gym/11-corpus-contract-qa/output/answers.json`\n\nComput... {agent_id=main, session_key=agent:main:main, iterations=11, final_length=348}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 answers correct. q1-highest: PASS; q2-autorenewal: PASS; q3-expiring2026: PASS (6 matched); q4-total: PASS; q5-shortest-notice: PASS"
+    }
+  },
+  {
+    "task_id": "12-corpus-kb-search",
+    "capability": "corpus_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:49:28.325473+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 33.75,
+      "stdout": "\n\ud83e\udd9e Completed \u2014 I read the KB corpus and wrote the answers to:\n\n`claw-gym/12-corpus-kb-search/output/answers.json`\n\nFinal outputs:\n- `q1`: [\"caching-strategies\",\"microservices-patterns\",\"resilience-patterns\",\"observability\"]\n- `q2`: 4\n- `q3`: \"k6\"\n- `q4`: 1\n- `q5`: \"expand-and-contract\"\n",
+      "stderr": "ls {count=1, iteration=17, agent_id=main, tools=[read_file]}\n2026/03/04 00:49:24 [2026-03-04T00:49:24Z] [INFO] agent: Tool call: read_file({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/12-corpus-kb-search/seed/kb/resilience-patterns.md\"}) {agent_id=main, tool=read_file, iteration=17}\n2026/03/04 00:49:24 [2026-03-04T00:49:24Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/12-corpus-kb-search/seed/kb/resilience-patterns.md]}\n2026/03/04 00:49:24 [2026-03-04T00:49:24Z] [INFO] tool: Tool execution completed {tool=read_file, duration_ms=0, result_length=1222}\n2026/03/04 00:49:26 [2026-03-04T00:49:26Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=18}\n2026/03/04 00:49:26 [2026-03-04T00:49:26Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":[\\\"caching-strategies\\\",\\\"microservices-patterns\\\",\\\"resilience-patterns\\\",\\\"observability\\\"],\\\"q2\\\":4,\\\"q3\\\":\\\"k6\\\",\\\"q4\\\":1,\\\"q5\\\":\\\"expand-and-contract\\\"}\",\"path\":\"/home/sand...) {agent_id=main, tool=write_file, iteration=18}\n2026/03/04 00:49:26 [2026-03-04T00:49:26Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":[\"caching-strategies\",\"microservices-patterns\",\"resilience-patterns\",\"observability\"],\"q2\":4,\"q3\":\"k6\",\"q4\":1,\"q5\":\"expand-and-contract\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/12-corpus-kb-search/output/answers.json]}\n2026/03/04 00:49:27 [2026-03-04T00:49:27Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=51, result_length=96}\n2026/03/04 00:49:28 [2026-03-04T00:49:28Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=19, content_chars=285}\n2026/03/04 00:49:28 [2026-03-04T00:49:28Z] [INFO] agent: Response: Completed \u2014 I read the KB corpus and wrote the answers to:\n\n`claw-gym/12-corpus-kb-search/output/answers.json`\n\nFinal... {agent_id=main, session_key=agent:main:main, iterations=19, final_length=285}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "3/5 answers correct. q1-circuit-breaker: PASS (4/4 found); q2-cache-levels: PASS; q3-load-tool: PASS; q4-cap-refs: FAIL (got 1, expected 2); q5-migration: FAIL (got 'expand-and-contract')"
+    }
+  },
+  {
+    "task_id": "13-corpus-meeting-notes",
+    "capability": "corpus_search",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:49:48.510893+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 20.18,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I read all six meeting notes and wrote the requested results to:\n\n`claw-gym/13-corpus-meeting-notes/output/answers.json`\n\nFinal answers:\n- `q1`: 8\n- `q2`: 20\n- `q3`: 4\n- `q4`: [\"2026-01-15-sprint-planning\",\"2026-01-29-sprint-review\",\"2026-02-12-architecture-review\",\"2026-03-12-quarterly-planning\"]\n- `q5`: 11  \n\n\n",
+      "stderr": "on=7}\n2026/03/04 00:49:44 [2026-03-04T00:49:44Z] [INFO] agent: Tool call: read_file({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/13-corpus-meeting-notes/seed/meetings/2026-03-12-quarterly-planning.md\"}) {tool=read_file, iteration=7, agent_id=main}\n2026/03/04 00:49:44 [2026-03-04T00:49:44Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/13-corpus-meeting-notes/seed/meetings/2026-03-12-quarterly-planning.md]}\n2026/03/04 00:49:44 [2026-03-04T00:49:44Z] [INFO] tool: Tool execution completed {tool=read_file, duration_ms=0, result_length=663}\n2026/03/04 00:49:46 [2026-03-04T00:49:46Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=8}\n2026/03/04 00:49:46 [2026-03-04T00:49:46Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":8,\\\"q2\\\":20,\\\"q3\\\":4,\\\"q4\\\":[\\\"2026-01-15-sprint-planning\\\",\\\"2026-01-29-sprint-review\\\",\\\"2026-02-12-architecture-review\\\",\\\"2026-03-12-quarterly-planning\\\"],\\\"q5\\\":11}\",\"path\"...) {agent_id=main, tool=write_file, iteration=8}\n2026/03/04 00:49:46 [2026-03-04T00:49:46Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":8,\"q2\":20,\"q3\":4,\"q4\":[\"2026-01-15-sprint-planning\",\"2026-01-29-sprint-review\",\"2026-02-12-architecture-review\",\"2026-03-12-quarterly-planning\"],\"q5\":11} path:/home/sandbox/.picoclaw/workspace/claw-gym/13-corpus-meeting-notes/output/answers.json]}\n2026/03/04 00:49:46 [2026-03-04T00:49:46Z] [INFO] tool: Tool execution completed {result_length=100, tool=write_file, duration_ms=95}\n2026/03/04 00:49:48 [2026-03-04T00:49:48Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=9, content_chars=322}\n2026/03/04 00:49:48 [2026-03-04T00:49:48Z] [INFO] agent: Response: Done \u2014 I read all six meeting notes and wrote the requested results to:\n\n`claw-gym/13-corpus-meeting-notes/output/ans... {agent_id=main, session_key=agent:main:main, iterations=9, final_length=322}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 answers correct. q1-attendees: PASS; q2-action-items: PASS; q3-sarah-items: PASS; q4-migration: PASS (4/4); q5-overdue: PASS"
+    }
+  },
+  {
+    "task_id": "14-long-context-config-audit",
+    "capability": "long_context",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:50:10.468710+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 21.95,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I audited the 8 YAML config files and wrote findings to:\n\n`claw-gym/14-long-context-config-audit/output/audit.json`  \n\nFindings:\n- Debug enabled: `auth-service`, `notification-service`, `scheduler-service`\n- Hardcoded secrets/passwords: `auth-service`, `notification-service`, `payment-service`, `scheduler-service`\n- Bind to `0.0.0.0`: `api-gateway`, `notification-service`, `payment-service`, `scheduler-service`\n- Insecure DB connections (`ssl: false`): `auth-service`, `notification-service`, `scheduler-service`\n- Missing health check config: `analytics-service`\n",
+      "stderr": "xt-config-audit/seed/configs/user-service.yaml\"}) {iteration=9, agent_id=main, tool=read_file}\n2026/03/04 00:50:06 [2026-03-04T00:50:06Z] [INFO] tool: Tool execution started {tool=read_file, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/14-long-context-config-audit/seed/configs/user-service.yaml]}\n2026/03/04 00:50:06 [2026-03-04T00:50:06Z] [INFO] tool: Tool execution completed {tool=read_file, duration_ms=0, result_length=623}\n2026/03/04 00:50:08 [2026-03-04T00:50:08Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=10}\n2026/03/04 00:50:08 [2026-03-04T00:50:08Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":[\\\"auth-service\\\",\\\"notification-service\\\",\\\"scheduler-service\\\"],\\\"q2\\\":[\\\"auth-service\\\",\\\"notification-service\\\",\\\"payment-service\\\",\\\"scheduler-service\\\"],\\\"q3\\\":[\\\"api-gate...) {agent_id=main, tool=write_file, iteration=10}\n2026/03/04 00:50:08 [2026-03-04T00:50:08Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":[\"auth-service\",\"notification-service\",\"scheduler-service\"],\"q2\":[\"auth-service\",\"notification-service\",\"payment-service\",\"scheduler-service\"],\"q3\":[\"api-gateway\",\"notification-service\",\"payment-service\",\"scheduler-service\"],\"q4\":[\"auth-service\",\"notification-service\",\"scheduler-service\"],\"q5\":[\"analytics-service\"]} path:/home/sandbox/.picoclaw/workspace/claw-gym/14-long-context-config-audit/output/audit.json]}\n2026/03/04 00:50:08 [2026-03-04T00:50:08Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=93, result_length=103}\n2026/03/04 00:50:10 [2026-03-04T00:50:10Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=11, content_chars=576}\n2026/03/04 00:50:10 [2026-03-04T00:50:10Z] [INFO] agent: Response: Done \u2014 I audited the 8 YAML config files and wrote findings to:\n\n`claw-gym/14-long-context-config-audit/output/audit.... {session_key=agent:main:main, iterations=11, final_length=576, agent_id=main}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 audit findings correct. q1-debug: PASS (3/3); q2-secrets: PASS (4/4); q3-bind: PASS (5/5); q4-insecure-db: PASS (3/3); q5-no-healthcheck: PASS (1/2)"
+    }
+  },
+  {
+    "task_id": "15-long-context-codebase-nav",
+    "capability": "long_context",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:50:39.823478+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 29.34,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I reviewed all 8 files and wrote answers to:\n\n`claw-gym/15-long-context-codebase-nav/output/answers.json`\n\nComputed results:\n- `q1`: `[\"request_logger\", \"request_timer\", \"authenticate\", \"add_security_headers\"]`\n- `q2`: `\"JWT\"`\n- `q3`: `error_handler` logs `exc` instead of `error`, causing a `NameError` in the non-`AppError` path.\n- `q4`: `7`\n- `q5`: `\"format_error_response\"`  \n\n\n",
+      "stderr": "nt=1, iteration=10}\n2026/03/04 00:50:32 [2026-03-04T00:50:32Z] [INFO] agent: Tool call: list_dir({\"path\":\"/home/sandbox/.picoclaw/workspace/claw-gym/15-long-context-codebase-nav\"}) {agent_id=main, tool=list_dir, iteration=10}\n2026/03/04 00:50:32 [2026-03-04T00:50:32Z] [INFO] tool: Tool execution started {tool=list_dir, args=map[path:/home/sandbox/.picoclaw/workspace/claw-gym/15-long-context-codebase-nav]}\n2026/03/04 00:50:32 [2026-03-04T00:50:32Z] [INFO] tool: Tool execution completed {tool=list_dir, duration_ms=0, result_length=24}\n2026/03/04 00:50:35 [2026-03-04T00:50:35Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=11}\n2026/03/04 00:50:35 [2026-03-04T00:50:35Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":[\\\"request_logger\\\",\\\"request_timer\\\",\\\"authenticate\\\",\\\"add_security_headers\\\"],\\\"q2\\\":\\\"JWT\\\",\\\"q3\\\":\\\"error_handler logs `exc` instead of `error`, causing NameError for non-A...) {agent_id=main, tool=write_file, iteration=11}\n2026/03/04 00:50:35 [2026-03-04T00:50:35Z] [INFO] tool: Tool execution started {args=map[content:{\"q1\":[\"request_logger\",\"request_timer\",\"authenticate\",\"add_security_headers\"],\"q2\":\"JWT\",\"q3\":\"error_handler logs `exc` instead of `error`, causing NameError for non-AppError exceptions\",\"q4\":7,\"q5\":\"format_error_response\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/15-long-context-codebase-nav/output/answers.json], tool=write_file}\n2026/03/04 00:50:35 [2026-03-04T00:50:35Z] [INFO] tool: Tool execution completed {result_length=105, tool=write_file, duration_ms=50}\n2026/03/04 00:50:39 [2026-03-04T00:50:39Z] [INFO] agent: LLM response without tool calls (direct answer) {iteration=12, content_chars=390, agent_id=main}\n2026/03/04 00:50:39 [2026-03-04T00:50:39Z] [INFO] agent: Response: Done \u2014 I reviewed all 8 files and wrote answers to:\n\n`claw-gym/15-long-context-codebase-nav/output/answers.json`\n\nCom... {agent_id=main, session_key=agent:main:main, iterations=12, final_length=390}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 answers correct. q1-middleware: PASS; q2-auth: PASS; q3-bug: PASS; q4-exceptions: PASS; q5-404-func: PASS"
+    }
+  },
+  {
+    "task_id": "16-long-context-data-reconcile",
+    "capability": "long_context",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:51:44.189589+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 64.36,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I reconciled all three CSVs and wrote:\n\n`claw-gym/16-long-context-data-reconcile/output/answers.json`\n\nComputed results:\n- `q1`: `{\"North\": 3629.84, \"South\": 2979.84, \"East\": 3114.83, \"West\": 2374.89}`\n- `q2`: `[\"Quinn Walker\", \"Rachel Hall\", \"Sam Young\", \"Tina King\"]`\n- `q3`: `[1029, 1041, 1050]`\n- `q4`: `{\"Electronics\": 338.14, \"Furniture\": 288.2, \"Books\": 64.98}`\n- `q5`: `\"Eva Martinez\"`  \n\n\n",
+      "stderr": "box/.picoclaw/workspace/claw-gym/16-long-context-data-reconci...) {agent_id=main, tool=exec, iteration=23}\n2026/03/04 00:51:39 [2026-03-04T00:51:39Z] [INFO] tool: Tool execution started {tool=exec, args=map[command:python3 /home/sandbox/.picoclaw/workspace/claw-gym/16-long-context-data-reconcile/seed/compute.py working_dir:/home/sandbox/.picoclaw/workspace/claw-gym/16-long-context-data-reconcile]}\n2026/03/04 00:51:39 [2026-03-04T00:51:39Z] [INFO] tool: Tool execution completed {tool=exec, duration_ms=30, result_length=236}\n2026/03/04 00:51:41 [2026-03-04T00:51:41Z] [INFO] agent: LLM requested tool calls {iteration=24, agent_id=main, tools=[write_file], count=1}\n2026/03/04 00:51:41 [2026-03-04T00:51:41Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"q1\\\":{\\\"North\\\":3629.84,\\\"South\\\":2979.84,\\\"East\\\":3114.83,\\\"West\\\":2374.89},\\\"q2\\\":[\\\"Quinn Walker\\\",\\\"Rachel Hall\\\",\\\"Sam Young\\\",\\\"Tina King\\\"],\\\"q3\\\":[1029,1041,1050],\\\"q4\\\":{\\\"E...) {agent_id=main, tool=write_file, iteration=24}\n2026/03/04 00:51:41 [2026-03-04T00:51:41Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"q1\":{\"North\":3629.84,\"South\":2979.84,\"East\":3114.83,\"West\":2374.89},\"q2\":[\"Quinn Walker\",\"Rachel Hall\",\"Sam Young\",\"Tina King\"],\"q3\":[1029,1041,1050],\"q4\":{\"Electronics\":338.14,\"Furniture\":288.2,\"Books\":64.98},\"q5\":\"Eva Martinez\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/16-long-context-data-reconcile/output/answers.json]}\n2026/03/04 00:51:41 [2026-03-04T00:51:41Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=49, result_length=107}\n2026/03/04 00:51:44 [2026-03-04T00:51:44Z] [INFO] agent: LLM response without tool calls (direct answer) {content_chars=406, agent_id=main, iteration=25}\n2026/03/04 00:51:44 [2026-03-04T00:51:44Z] [INFO] agent: Response: Done \u2014 I reconciled all three CSVs and wrote:\n\n`claw-gym/16-long-context-data-reconcile/output/answers.json`\n\nCompute... {agent_id=main, session_key=agent:main:main, iterations=25, final_length=406}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 answers correct. q1-revenue: PASS (3/4 regions); q2-no-orders: PASS (4 matched); q3-orphans: PASS; q4-avg-category: PASS (3/3); q5-highest-spender: PASS"
+    }
+  },
+  {
+    "task_id": "17-web-fetch-api",
+    "capability": "web_fetch",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:52:26.462966+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 42.25,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I fetched JSONPlaceholder data and wrote the requested result to:\n\n`claw-gym/17-web-fetch-api/output/results.json`  \n\nResults:\n- `total_users`: 10\n- `total_posts`: 100\n- Most prolific user: **Leanne Graham** (email: **Sincere@april.biz**, company: **Romaguera-Crona**)\n- `most_prolific_post_count`: 10\n\n\n",
+      "stderr": "m/posts').read())\nprint('total_users',len(users),'total_posts',len(posts))\nc=Counter(p['userId'] for p in posts)\nprint('counter',c)\n\nmax_posts=max(c.values())\nuid=min(u for u,n in c.items() if n==max_posts)\nuser=next(u for u in users if u['id']==uid)\nprint('uid',uid,'count',max_posts,'name',user['name'],'email',user['email'],'company',user['company']['name'])\nPY working_dir:/home/sandbox/.picoclaw/workspace/claw-gym/17-web-fetch-api]}\n2026/03/04 00:52:21 [2026-03-04T00:52:21Z] [ERROR] tool: Tool execution failed {tool=exec, duration=1, error=Command blocked by safety guard (path outside working dir)}\n2026/03/04 00:52:23 [2026-03-04T00:52:23Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=10}\n2026/03/04 00:52:23 [2026-03-04T00:52:23Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"total_users\\\":10,\\\"total_posts\\\":100,\\\"most_prolific_user\\\":{\\\"name\\\":\\\"Leanne Graham\\\",\\\"email\\\":\\\"Sincere@april.biz\\\",\\\"company\\\":\\\"Romaguera-Crona\\\"},\\\"most_prolific_post_count\\\":...) {tool=write_file, iteration=10, agent_id=main}\n2026/03/04 00:52:23 [2026-03-04T00:52:23Z] [INFO] tool: Tool execution started {args=map[content:{\"total_users\":10,\"total_posts\":100,\"most_prolific_user\":{\"name\":\"Leanne Graham\",\"email\":\"Sincere@april.biz\",\"company\":\"Romaguera-Crona\"},\"most_prolific_post_count\":10} path:/home/sandbox/.picoclaw/workspace/claw-gym/17-web-fetch-api/output/results.json], tool=write_file}\n2026/03/04 00:52:23 [2026-03-04T00:52:23Z] [INFO] tool: Tool execution completed {tool=write_file, duration_ms=65, result_length=93}\n2026/03/04 00:52:26 [2026-03-04T00:52:26Z] [INFO] agent: LLM response without tool calls (direct answer) {content_chars=312, agent_id=main, iteration=11}\n2026/03/04 00:52:26 [2026-03-04T00:52:26Z] [INFO] agent: Response: Done \u2014 I fetched JSONPlaceholder data and wrote the requested result to:\n\n`claw-gym/17-web-fetch-api/output/results.j... {iterations=11, final_length=312, agent_id=main, session_key=agent:main:main}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "4/4 checks passed. total_users: PASS; total_posts: PASS; prolific_user: PASS (name=Leanne Graham); post_count: PASS"
+    }
+  },
+  {
+    "task_id": "18-web-fetch-html-extract",
+    "capability": "web_fetch",
+    "claw": "picoclaw",
+    "timestamp": "2026-03-04T00:53:09.726255+00:00",
+    "run": {
+      "status": "completed",
+      "exit_code": 0,
+      "elapsed_seconds": 43.24,
+      "stdout": "\n\ud83e\udd9e Done \u2014 I wrote the extracted results to:\n\n`claw-gym/18-web-fetch-html-extract/output/results.json`  \n\nBased on the Wikipedia list:\n- #1: Tokyo (Japan)\n- #2: Delhi (India)\n- Population #1 (city proper): 37.4 million\n- Top continent in top 10 entries: Asia\n",
+      "stderr": ":53:04 [2026-03-04T00:53:04Z] [INFO] agent: LLM requested tool calls {iteration=4, agent_id=main, tools=[web_fetch], count=1}\n2026/03/04 00:53:04 [2026-03-04T00:53:04Z] [INFO] agent: Tool call: web_fetch({\"maxChars\":20000,\"url\":\"https://en.wikipedia.org/wiki/List_of_largest_cities\"}) {tool=web_fetch, iteration=4, agent_id=main}\n2026/03/04 00:53:04 [2026-03-04T00:53:04Z] [INFO] tool: Tool execution started {tool=web_fetch, args=map[maxChars:20000 url:https://en.wikipedia.org/wiki/List_of_largest_cities]}\n2026/03/04 00:53:04 [2026-03-04T00:53:04Z] [INFO] tool: Tool execution completed {tool=web_fetch, duration_ms=101, result_length=112}\n2026/03/04 00:53:07 [2026-03-04T00:53:07Z] [INFO] agent: LLM requested tool calls {agent_id=main, tools=[write_file], count=1, iteration=5}\n2026/03/04 00:53:07 [2026-03-04T00:53:07Z] [INFO] agent: Tool call: write_file({\"content\":\"{\\\"city_1\\\":\\\"Tokyo\\\",\\\"city_2\\\":\\\"Delhi\\\",\\\"country_1\\\":\\\"Japan\\\",\\\"country_2\\\":\\\"India\\\",\\\"population_1_millions\\\":37.4,\\\"top_continent\\\":\\\"Asia\\\"}\",\"path\":\"/home/sandbox/.picoclaw/wo...) {tool=write_file, iteration=5, agent_id=main}\n2026/03/04 00:53:07 [2026-03-04T00:53:07Z] [INFO] tool: Tool execution started {tool=write_file, args=map[content:{\"city_1\":\"Tokyo\",\"city_2\":\"Delhi\",\"country_1\":\"Japan\",\"country_2\":\"India\",\"population_1_millions\":37.4,\"top_continent\":\"Asia\"} path:/home/sandbox/.picoclaw/workspace/claw-gym/18-web-fetch-html-extract/output/results.json]}\n2026/03/04 00:53:07 [2026-03-04T00:53:07Z] [INFO] tool: Tool execution completed {result_length=102, tool=write_file, duration_ms=54}\n2026/03/04 00:53:09 [2026-03-04T00:53:09Z] [INFO] agent: LLM response without tool calls (direct answer) {agent_id=main, iteration=6, content_chars=256}\n2026/03/04 00:53:09 [2026-03-04T00:53:09Z] [INFO] agent: Response: Done \u2014 I wrote the extracted results to:\n\n`claw-gym/18-web-fetch-html-extract/output/results.json`  \n\nBased on the Wi... {agent_id=main, session_key=agent:main:main, iterations=6, final_length=256}\n"
+    },
+    "verify": {
+      "passed": true,
+      "message": "5/5 checks passed. city_1: PASS (tokyo); city_2: PASS (delhi); country_1: PASS (japan); population: PASS (37.4M); top_continent: PASS"
+    }
+  }
+]

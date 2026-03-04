@@ -1,0 +1,10 @@
+{
+  "id": "10-web-search-current-info",
+  "name": "Web Search Current Info",
+  "capability": "web_search",
+  "time_limit_seconds": 120,
+  "prompt": "Use web search to find these stable institutional/scientific facts. Write answers to `workspace/answers.json`.\n\n1. List the 5 permanent members of the UN Security Council.\n2. What is the ISO 4217 currency code for the Japanese Yen?\n3. What is currently the tallest building in the world?\n4. What are the 5 colors of the Olympic rings?\n5. What is element 79 on the periodic table?\n\nFormat:\n{\"q1\": [\"China\", \"France\", \"Russia\", \"United Kingdom\", \"United States\"], \"q2\": \"JPY\", \"q3\": \"Burj Khalifa\", \"q4\": [\"blue\", \"yellow\", \"black\", \"green\", \"red\"], \"q5\": \"Gold\"}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tools_hint": "web_search",
+  "tags": ["web_search", "current_info"]
+}

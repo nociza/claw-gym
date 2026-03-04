@@ -1,0 +1,42 @@
+# User Service Configuration
+service:
+  name: user-service
+  version: 3.0.1
+  environment: production
+
+server:
+  host: 127.0.0.1
+  port: 8082
+  workers: 3
+  debug: false
+
+logging:
+  level: info
+  format: json
+  output: /var/log/user-service/app.log
+
+database:
+  host: db-replica.internal
+  port: 5432
+  name: user_db
+  user: user_svc
+  password: ${DB_PASSWORD}
+  ssl: true
+  pool_size: 15
+
+cache:
+  type: redis
+  host: redis.internal
+  port: 6379
+  ttl: 300
+
+health_check:
+  enabled: true
+  path: /health
+  interval: 30
+
+email:
+  smtp_host: smtp.example.com
+  smtp_port: 587
+  use_tls: true
+  sender: "noreply@example.com"

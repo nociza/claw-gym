@@ -1,0 +1,38 @@
+# Notification Service Configuration
+service:
+  name: notification-service
+  version: 1.2.0
+  environment: production
+
+server:
+  host: 0.0.0.0
+  port: 8084
+  workers: 2
+  debug: true
+
+logging:
+  level: debug
+  format: text
+  output: stdout
+
+database:
+  host: db-replica.internal
+  port: 5432
+  name: notification_db
+  user: notif_user
+  password: ${DB_PASSWORD}
+  ssl: false
+  pool_size: 5
+
+email:
+  smtp_host: smtp.example.com
+  smtp_port: 587
+  use_tls: true
+  sender: "notifications@example.com"
+  api_key: "SG.sendgrid_key_12345"
+
+push:
+  firebase_key: "AAAA-firebase-server-key-here"
+  apns_cert: /etc/certs/apns.pem
+
+# Note: health check not configured for this service

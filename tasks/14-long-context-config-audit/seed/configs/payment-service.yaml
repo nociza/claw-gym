@@ -1,0 +1,38 @@
+# Payment Service Configuration
+service:
+  name: payment-service
+  version: 2.3.0
+  environment: production
+
+server:
+  host: 0.0.0.0
+  port: 8083
+  workers: 4
+  debug: false
+
+logging:
+  level: info
+  format: json
+  output: /var/log/payment-service/app.log
+
+database:
+  host: db-primary.internal
+  port: 5432
+  name: payment_db
+  user: payment_admin
+  password: "PaymentDB@2024Secure"
+  ssl: true
+  pool_size: 25
+
+stripe:
+  api_key: "sk_live_abc123def456ghi789"
+  webhook_secret: "whsec_xyz987uvw654"
+
+health_check:
+  enabled: true
+  path: /health
+  interval: 10
+
+encryption:
+  algorithm: AES-256-GCM
+  key_rotation_days: 90

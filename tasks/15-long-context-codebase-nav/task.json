@@ -1,0 +1,9 @@
+{
+  "id": "15-long-context-codebase-nav",
+  "name": "Long Context Codebase Nav",
+  "capability": "long_context",
+  "time_limit_seconds": 180,
+  "prompt": "The `seed/webapp/` directory contains an 8-file Python web application. Read all files and answer these questions. Write answers to `workspace/answers.json`.\n\n1. Trace a GET /api/users request: which middleware functions does it pass through, in order? (list of function names)\n2. What authentication mechanism does the app use? (e.g., 'JWT', 'session', 'API key', 'OAuth')\n3. There is a bug in the error handling middleware - what is it? (brief description)\n4. How many custom exception classes are defined across all files? (integer)\n5. When a 404 error occurs, trace the response: which function generates the error response JSON? (function name)\n\nFormat:\n{\"q1\": [\"func1\", \"func2\"], \"q2\": \"JWT\", \"q3\": \"description\", \"q4\": 5, \"q5\": \"function_name\"}",
+  "expected_output_files": ["workspace/answers.json"],
+  "tags": ["long_context", "codebase", "navigation"]
+}

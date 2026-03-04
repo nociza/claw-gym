@@ -1,0 +1,9 @@
+{
+  "id": "14-long-context-config-audit",
+  "name": "Long Context Config Audit",
+  "capability": "long_context",
+  "time_limit_seconds": 150,
+  "prompt": "The `seed/configs/` directory contains 8 YAML configuration files for a microservices application. Perform a security audit and write findings to `workspace/audit.json`.\n\nFind:\n1. Which services have debug mode enabled? (list of service names)\n2. Which config files contain hardcoded secrets/passwords? (list of filenames without extension)\n3. Which services bind to 0.0.0.0? (list of service names)\n4. Which services use insecure database connections (no SSL/TLS)? (list of service names)\n5. Which services are missing health check configuration? (list of service names)\n\nFormat:\n{\"q1\": [\"service-a\"], \"q2\": [\"config-name\"], \"q3\": [\"service-b\"], \"q4\": [\"service-c\"], \"q5\": [\"service-d\"]}",
+  "expected_output_files": ["workspace/audit.json"],
+  "tags": ["long_context", "security", "config_audit"]
+}
